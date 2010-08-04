@@ -17,7 +17,7 @@
 {
 	[openPanel setCanChooseFiles:YES];
 	[openPanel setCanChooseDirectories:YES];
-	return [openPanel runModalForDirectory:nil file:nil types:[NSArray arrayWithObject: @"git"]];
+	return [openPanel runModalForDirectory:nil file:nil types:[NSArray arrayWithObjects: @"git", @"bundle", nil]];
 }
 
 // Convert paths to the .git dir before searching for an already open document
