@@ -1517,6 +1517,351 @@
 			};
 			name = Release;
 		};
+		3DE9F326120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = DEBUG_BUILD;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_PREPROCESS = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = "Debug Clang";
+		};
+		3DE9F327120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GitX_Prefix.pch;
+				HEADER_SEARCH_PATHS = libgit2/src;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision;
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = libgit2;
+				PRODUCT_NAME = GitX;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = "Debug Clang";
+		};
+		3DE9F328120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = libgit2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = gitx;
+				ZERO_LINK = YES;
+			};
+			name = "Debug Clang";
+		};
+		3DE9F329120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = /System/Library/Frameworks;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GitX_Prefix.pch;
+				HEADER_SEARCH_PATHS = libgit2/src;
+				INFOPLIST_FILE = "SpeedTest-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = libgit2;
+				OTHER_CFLAGS = "-DCLI";
+				OTHER_LDFLAGS = (
+					"-L.",
+					"-framework",
+					Foundation,
+					"-framework",
+					Cocoa,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = SpeedTest;
+				SDKROOT = macosx10.5;
+			};
+			name = "Debug Clang";
+		};
+		3DE9F32A120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Generate PList Prefix";
+			};
+			name = "Debug Clang";
+		};
+		3DE9F32B120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				HEADER_SEARCH_PATHS = libgit2/src;
+				INFOPLIST_FILE = "GitXTesting-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/libgit2\"",
+				);
+				OTHER_CFLAGS = "-DCLI";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = GitXTesting;
+			};
+			name = "Debug Clang";
+		};
+		3DE9F32C120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = libgit2;
+			};
+			name = "Debug Clang";
+		};
+		3DE9F32D120C901000136A8C /* Debug Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = gitx_askpasswd;
+			};
+			name = "Debug Clang";
+		};
+		3DE9F32E120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+					x86_64,
+				);
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision;
+				INFOPLIST_PREPROCESS = YES;
+				LLVM_LTO = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = "Release Clang";
+		};
+		3DE9F32F120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GitX_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				HEADER_SEARCH_PATHS = libgit2/src;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision;
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = libgit2;
+				PRODUCT_NAME = GitX;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release Clang";
+		};
+		3DE9F330120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = libgit2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = gitx;
+				ZERO_LINK = NO;
+			};
+			name = "Release Clang";
+		};
+		3DE9F331120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "SpeedTest-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = libgit2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = SpeedTest;
+				SDKROOT = iphoneos2.0;
+				ZERO_LINK = NO;
+			};
+			name = "Release Clang";
+		};
+		3DE9F332120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				INFOPLIST_PREPROCESS = YES;
+				PRODUCT_NAME = "Generate PList Prefix";
+				ZERO_LINK = NO;
+			};
+			name = "Release Clang";
+		};
+		3DE9F333120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "GitXTesting-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/libgit2\"",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = GitXTesting;
+				ZERO_LINK = NO;
+			};
+			name = "Release Clang";
+		};
+		3DE9F334120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = libgit2;
+				ZERO_LINK = NO;
+			};
+			name = "Release Clang";
+		};
+		3DE9F335120C901A00136A8C /* Release Clang */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = gitx_askpasswd;
+				ZERO_LINK = NO;
+			};
+			name = "Release Clang";
+		};
 		551BF113112F371800265053 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1801,7 +2146,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26FC0A850875C7B200E6366F /* Debug */,
+				3DE9F327120C901000136A8C /* Debug Clang */,
 				26FC0A860875C7B200E6366F /* Release */,
+				3DE9F32F120C901A00136A8C /* Release Clang */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1810,7 +2157,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26FC0A890875C7B200E6366F /* Debug */,
+				3DE9F326120C901000136A8C /* Debug Clang */,
 				26FC0A8A0875C7B200E6366F /* Release */,
+				3DE9F32E120C901A00136A8C /* Release Clang */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1819,7 +2168,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				551BF113112F371800265053 /* Debug */,
+				3DE9F32D120C901000136A8C /* Debug Clang */,
 				551BF114112F371800265053 /* Release */,
+				3DE9F335120C901A00136A8C /* Release Clang */,
 				551BF115112F371800265053 /* Install */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1829,7 +2180,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				913D5E4B0E55644600CECEA2 /* Debug */,
+				3DE9F328120C901000136A8C /* Debug Clang */,
 				913D5E4C0E55644600CECEA2 /* Release */,
+				3DE9F330120C901A00136A8C /* Release Clang */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1838,7 +2191,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8022B1511DFCE7F003C21F6 /* Debug */,
+				3DE9F32C120C901000136A8C /* Debug Clang */,
 				D8022B1611DFCE7F003C21F6 /* Release */,
+				3DE9F334120C901A00136A8C /* Release Clang */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1847,7 +2202,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F56439F80F792B2100A579C2 /* Debug */,
+				3DE9F32A120C901000136A8C /* Debug Clang */,
 				F56439F90F792B2100A579C2 /* Release */,
+				3DE9F332120C901A00136A8C /* Release Clang */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1856,7 +2213,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F567CC3B106E6B920059BB9D /* Debug */,
+				3DE9F32B120C901000136A8C /* Debug Clang */,
 				F567CC3C106E6B920059BB9D /* Release */,
+				3DE9F333120C901A00136A8C /* Release Clang */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1865,7 +2224,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5886A130ED5D33E0066E74C /* Debug */,
+				3DE9F329120C901000136A8C /* Debug Clang */,
 				F5886A140ED5D33E0066E74C /* Release */,
+				3DE9F331120C901A00136A8C /* Release Clang */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
