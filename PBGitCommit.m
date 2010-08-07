@@ -10,6 +10,8 @@
 #import "PBGitSHA.h"
 #import "PBGitDefaults.h"
 
+#import "NSDate_Fuzzy.h"
+
 
 NSString * const kGitXCommitType = @"commit";
 
@@ -29,8 +31,7 @@ NSString * const kGitXCommitType = @"commit";
 
 - (NSString *) dateString
 {
-	NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%Y-%m-%d %H:%M:%S" allowNaturalLanguage:NO];
-	return [formatter stringFromDate: self.date];
+	return [self.date distanceOfTimeInWordsFromNow];
 }
 
 - (NSArray*) treeContents

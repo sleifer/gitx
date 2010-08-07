@@ -54,6 +54,7 @@
 		D8083DC4111F90F300337480 /* PBCloneRepsitoryToSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8083DC3111F90F300337480 /* PBCloneRepsitoryToSheet.m */; };
 		D8083DCD111F918900337480 /* PBCloneRepsitoryToSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8083DCB111F918900337480 /* PBCloneRepsitoryToSheet.xib */; };
 		D8083E03111FA33700337480 /* PBCloneRepositoryPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8083E02111FA33700337480 /* PBCloneRepositoryPanel.m */; };
+		D80C72E8120D4102005D4211 /* NSDate_Fuzzy.m in Sources */ = {isa = PBXBuildFile; fileRef = D80C72E7120D4102005D4211 /* NSDate_Fuzzy.m */; };
 		D828A40D1127B18700F09D11 /* PBSourceViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D828A40C1127B18700F09D11 /* PBSourceViewCell.m */; };
 		D828A4111127B1C400F09D11 /* PBSourceViewBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D828A4101127B1C400F09D11 /* PBSourceViewBadge.m */; };
 		D828A5F21128AE7200F09D11 /* FetchTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = D828A5EF1128AE7200F09D11 /* FetchTemplate.png */; };
@@ -285,6 +286,8 @@
 		D8083DCC111F918900337480 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PBCloneRepsitoryToSheet.xib; sourceTree = "<group>"; };
 		D8083E01111FA33700337480 /* PBCloneRepositoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBCloneRepositoryPanel.h; sourceTree = "<group>"; };
 		D8083E02111FA33700337480 /* PBCloneRepositoryPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBCloneRepositoryPanel.m; sourceTree = "<group>"; };
+		D80C72E6120D4102005D4211 /* NSDate_Fuzzy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_Fuzzy.h; sourceTree = "<group>"; };
+		D80C72E7120D4102005D4211 /* NSDate_Fuzzy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_Fuzzy.m; sourceTree = "<group>"; };
 		D823487410CB382C00944BDE /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
 		D828A40B1127B18700F09D11 /* PBSourceViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBSourceViewCell.h; sourceTree = "<group>"; };
 		D828A40C1127B18700F09D11 /* PBSourceViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBSourceViewCell.m; sourceTree = "<group>"; };
@@ -801,6 +804,8 @@
 				F567B88C1057FA9F000DB976 /* NSOutlineViewExt.m */,
 				D8A4BB6D11337D5C00E92D51 /* PBGitGradientBarView.h */,
 				D8A4BB6E11337D5C00E92D51 /* PBGitGradientBarView.m */,
+				D80C72E6120D4102005D4211 /* NSDate_Fuzzy.h */,
+				D80C72E7120D4102005D4211 /* NSDate_Fuzzy.m */,
 			);
 			name = Aux;
 			sourceTree = "<group>";
@@ -1265,6 +1270,7 @@
 				D8E105471157C18200FC28A4 /* PBQLTextView.m in Sources */,
 				D8FBCF19115FA20C0098676A /* PBGitSHA.m in Sources */,
 				D8022FED11E124C8003C21F6 /* PBGitXMessageSheet.m in Sources */,
+				D80C72E8120D4102005D4211 /* NSDate_Fuzzy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1482,7 +1488,7 @@
 		26FC0A890875C7B200E6366F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = DEBUG_BUILD;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
