@@ -23,6 +23,11 @@
 	return self;
 }
 
+- (NSString *)repositoryPath
+{
+	return repositoryPath;
+}
+
 - (void) writeValue:(NSString *)value forKey:(NSString *)key global:(BOOL)global
 {
 	[self willChangeValueForKey:[key substringToIndex:[key rangeOfString:@"."].location]];

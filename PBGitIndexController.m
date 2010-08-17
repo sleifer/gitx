@@ -15,6 +15,7 @@
 
 @interface PBGitIndexController ()
 - (void)discardChangesForFiles:(NSArray *)files force:(BOOL)force;
+- (void)deleteFiles:(NSArray *)files;
 @end
 
 @implementation PBGitIndexController
@@ -140,6 +141,13 @@
 	[discardForceItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[menu addItem:discardForceItem];
 	
+	NSMenuItem *deleteItem = [[NSMenuItem alloc] initWithTitle:@"Delete files…" action:@selector(deleteFilesAction:) keyEquivalent:@""];
+	[deleteItem setTarget:self];
+	[deleteItem setAlternate:NO];
+	[deleteItem setRepresentedObject:selectedFiles];
+	
+	[menu addItem:deleteItem];
+	
 	return menu;
 }
 
@@ -176,6 +184,13 @@
 	NSArray *selectedFiles = [sender representedObject];
 	if ([selectedFiles count] > 0)
 		[self discardChangesForFiles:selectedFiles force:FALSE];
+}
+
+- (void)deleteFilesAction:(id) sender
+{
+	NSArray *selectedFiles = [sender representedObject];
+	if ([selectedFiles count] > 0)
+		[self deleteFiles:selectedFiles];
 }
 
 - (void)forceDiscardFilesAction:(id) sender
@@ -220,6 +235,28 @@
 	} else {
         [commitController.index discardChangesForFiles:files];
     }
+}
+
+- (void) deleteFilesAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    [[alert window] orderOut:nil];
+	
+	if (returnCode == NSAlertDefaultReturn) {
+        [commitController.index deleteFiles:contextInfo];
+	}
+}
+
+- (void) deleteFiles:(NSArray *)files
+{
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Delete files"
+									 defaultButton:nil
+								   alternateButton:@"Cancel"
+									   otherButton:nil
+						 informativeTextWithFormat:@"Are you sure you wish to delete these files?\n\nYou cannot undo this operation."];
+	[alert beginSheetModalForWindow:[[commitController view] window]
+					  modalDelegate:self
+					 didEndSelector:@selector(deleteFilesAlertDidEnd:returnCode:contextInfo:)
+						contextInfo:files];
 }
 
 # pragma mark TableView icon delegate

@@ -72,6 +72,7 @@ extern NSString *PBGitIndexOperationFailed;
 - (BOOL)stageFiles:(NSArray *)stageFiles;
 - (BOOL)unstageFiles:(NSArray *)unstageFiles;
 - (void)discardChangesForFiles:(NSArray *)discardFiles;
+- (void)deleteFiles:(NSArray *)discardFiles;
 
 // Intra-file changes
 - (BOOL)applyPatch:(NSString *)hunk stage:(BOOL)stage reverse:(BOOL)reverse;

@@ -328,7 +328,28 @@ NSString *PBGitIndexOperationFailed = @"PBGitIndexOperationFailed";
 
 	for (PBChangedFile *file in discardFiles)
 		file.hasUnstagedChanges = NO;
+	
+	[self postIndexChange];
+}
 
+- (void)deleteFiles:(NSArray *)discardFiles
+{
+	NSString *repoPath = [repository.config repositoryPath];
+	for (PBChangedFile *file in discardFiles) {
+		NSError *error = nil;
+		NSString *filePath = [[repoPath stringByDeletingLastPathComponent]
+							  stringByAppendingPathComponent:file.path];
+		BOOL ref = [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+		if (!ref) {
+			if (error)
+				NSLog(@"delete error %@", error);
+				//[self.windowController showErrorSheet:error];
+			return;
+		}
+	}
+	for (PBChangedFile *file in discardFiles)
+		file.hasUnstagedChanges = NO;
+	
 	[self postIndexChange];
 }
 

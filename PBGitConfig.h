@@ -16,4 +16,6 @@
 
 - init;
 - initWithRepositoryPath:(NSString *)path;
+- (NSString *)repositoryPath;
+
 @end
