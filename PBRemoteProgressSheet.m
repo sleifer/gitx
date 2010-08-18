@@ -46,6 +46,7 @@ NSString * const kGitXProgressErrorInfo          = @"PBGitXProgressErrorInfo";
 
 @synthesize progressDescription;
 @synthesize progressIndicator;
+@synthesize abortButton;
 
 
 
