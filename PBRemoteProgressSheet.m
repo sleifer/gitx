@@ -101,6 +101,11 @@ NSString * const kGitXProgressErrorInfo          = @"PBGitXProgressErrorInfo";
 }
 
 
+- (IBAction) abort:(id)sender
+{
+	[gitTask terminate];
+}
+
 
 #pragma mark Notifications
 

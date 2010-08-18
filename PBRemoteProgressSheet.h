@@ -31,6 +31,7 @@ extern NSString * const kGitXProgressErrorInfo;
 
 	NSTextField         *progressDescription;
 	NSProgressIndicator *progressIndicator;
+	NSButton			*abortButton;
 
 	NSTimer *taskTimer;
 }
@@ -42,6 +43,8 @@ extern NSString * const kGitXProgressErrorInfo;
 
 @property (assign) IBOutlet NSTextField         *progressDescription;
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;
+@property (assign) IBOutlet NSButton			*abortButton;
 
+- (IBAction) abort:(id)sender;
 
 @end
