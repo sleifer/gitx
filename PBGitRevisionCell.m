@@ -209,6 +209,7 @@
     [[NSColor blackColor] setStroke];
 
     NSRect lastRect;
+    bzero(&lastRect, sizeof(lastRect));
     int index = 0;
     for (NSValue *rectValue in [self rectsForRefsinRect:*refRect])
     {
