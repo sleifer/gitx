@@ -14,13 +14,13 @@
 
 
 @interface PBCreateBranchSheet : NSWindowController {
-	PBGitRepository *repository;
-	id <PBGitRefish> startRefish;
+    PBGitRepository *repository;
+    id <PBGitRefish> startRefish;
 
-	BOOL shouldCheckoutBranch;
+    BOOL shouldCheckoutBranch;
 
-	NSTextField *branchNameField;
-	NSTextField *errorMessageField;
+    NSTextField *branchNameField;
+    NSTextField *errorMessageField;
 }
 
 + (void) beginCreateBranchSheetAtRefish:(id <PBGitRefish>)ref inRepository:(PBGitRepository *)repo;

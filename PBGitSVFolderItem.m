@@ -14,21 +14,21 @@
 
 + (id)folderItemWithTitle:(NSString *)title
 {
-	PBGitSVFolderItem *item = [self itemWithTitle:title];
-	
-	return item;
+    PBGitSVFolderItem *item = [self itemWithTitle:title];
+
+    return item;
 }
 
 
 - (NSImage *) icon
 {
-	static NSImage *folderImage = nil;
-	if (!folderImage) {
-		folderImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)];
-		[folderImage setSize:NSMakeSize(16,16)];
-	}
+    static NSImage *folderImage = nil;
+    if (!folderImage) {
+        folderImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericFolderIcon)];
+        [folderImage setSize:NSMakeSize(16,16)];
+    }
 
-	return folderImage;
+    return folderImage;
 }
 
 @end

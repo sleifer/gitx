@@ -12,23 +12,23 @@
 @class PBViewController, PBGitSidebarController;
 
 @interface PBGitWindowController : NSWindowController {
-	__weak PBGitRepository* repository;
+    __weak PBGitRepository* repository;
 
-	PBViewController *contentController;
+    PBViewController *contentController;
 
-	PBGitSidebarController *sidebarController;
-	IBOutlet NSView *sourceListControlsView;
-	IBOutlet NSSplitView *splitView;
-	IBOutlet NSView *sourceSplitView;
-	IBOutlet NSView *contentSplitView;
+    PBGitSidebarController *sidebarController;
+    IBOutlet NSView *sourceListControlsView;
+    IBOutlet NSSplitView *splitView;
+    IBOutlet NSView *sourceSplitView;
+    IBOutlet NSView *contentSplitView;
 
-	IBOutlet NSTextField *statusField;
-	IBOutlet NSProgressIndicator *progressIndicator;
+    IBOutlet NSTextField *statusField;
+    IBOutlet NSProgressIndicator *progressIndicator;
 
-	PBViewController* viewController;
+    PBViewController* viewController;
 
-	IBOutlet NSToolbarItem *terminalItem;
-	IBOutlet NSToolbarItem *finderItem;
+    IBOutlet NSToolbarItem *terminalItem;
+    IBOutlet NSToolbarItem *finderItem;
 }
 
 @property (assign) __weak PBGitRepository *repository;

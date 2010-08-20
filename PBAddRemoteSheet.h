@@ -12,14 +12,14 @@
 @class PBGitRepository;
 
 @interface PBAddRemoteSheet : NSWindowController {
-	PBGitRepository *repository;
+    PBGitRepository *repository;
 
-	NSTextField *remoteName;
-	NSTextField *remoteURL;
-	NSTextField *errorMessage;
+    NSTextField *remoteName;
+    NSTextField *remoteURL;
+    NSTextField *errorMessage;
 
-	NSOpenPanel *browseSheet;
-	NSView      *browseAccessoryView;
+    NSOpenPanel *browseSheet;
+    NSView      *browseAccessoryView;
 }
 
 + (void) beginAddRemoteSheetForRepository:(PBGitRepository *)repo;

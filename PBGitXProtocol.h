@@ -10,7 +10,7 @@
 #import "PBGitRepository.h"
 
 @interface PBGitXProtocol : NSURLProtocol {
-	NSFileHandle *handle;
+    NSFileHandle *handle;
 }
 @end
 

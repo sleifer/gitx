@@ -17,12 +17,12 @@
 
 
 @interface PBGitHistoryGrapher : NSObject {
-	id delegate;
-	NSOperationQueue *currentQueue;
+    id delegate;
+    NSOperationQueue *currentQueue;
 
-	NSMutableSet *searchSHAs;
-	PBGitGrapher *grapher;
-	BOOL viewAllBranches;
+    NSMutableSet *searchSHAs;
+    PBGitGrapher *grapher;
+    BOOL viewAllBranches;
 }
 
 - (id) initWithBaseCommits:(NSSet *)commits viewAllBranches:(BOOL)viewAll queue:(NSOperationQueue *)queue delegate:(id)theDelegate;

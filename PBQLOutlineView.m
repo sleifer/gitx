@@ -13,70 +13,70 @@
 
 - initWithCoder: (NSCoder *) coder
 {
-	id a = [super initWithCoder:coder];
-	[a setDataSource: a];
-	[a registerForDraggedTypes: [NSArray arrayWithObject:NSFilesPromisePboardType]];
-	return a;
+    id a = [super initWithCoder:coder];
+    [a setDataSource: a];
+    [a registerForDraggedTypes: [NSArray arrayWithObject:NSFilesPromisePboardType]];
+    return a;
 }
 
 /* Needed to drag outside application */
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL) local
 {
-	return NSDragOperationCopy;
+    return NSDragOperationCopy;
 }
 
 - (void) keyDown: (NSEvent *) event
 {
-	if ([[event characters] isEqualToString:@" "]) {
-		[controller toggleQLPreviewPanel:self];
-		return;
-	}
+    if ([[event characters] isEqualToString:@" "]) {
+        [controller toggleQLPreviewPanel:self];
+        return;
+    }
 
-	[super keyDown:event];
+    [super keyDown:event];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *) pb
 {
-	NSMutableArray* fileNames = [NSMutableArray array];
-	for (id tree in items)
-		[fileNames addObject: [[[tree representedObject] path] pathExtension]];
+    NSMutableArray* fileNames = [NSMutableArray array];
+    for (id tree in items)
+        [fileNames addObject: [[[tree representedObject] path] pathExtension]];
 
-	[pb declareTypes:[NSArray arrayWithObject:NSFilesPromisePboardType] owner:self];
+    [pb declareTypes:[NSArray arrayWithObject:NSFilesPromisePboardType] owner:self];
     [pb setPropertyList:fileNames forType:NSFilesPromisePboardType];
 
-	return YES;
+    return YES;
 }
 
 - (NSArray *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items
 {
-	NSMutableArray* fileNames = [NSMutableArray array];
-	for (id obj in items) {
-		PBGitTree* tree = [obj representedObject];
-		[fileNames addObject: [tree path]];
-		[tree saveToFolder:[dropDestination path]];
-	}
-	return fileNames;
+    NSMutableArray* fileNames = [NSMutableArray array];
+    for (id obj in items) {
+        PBGitTree* tree = [obj representedObject];
+        [fileNames addObject: [tree path]];
+        [tree saveToFolder:[dropDestination path]];
+    }
+    return fileNames;
 }
 
 - (NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-	if ([theEvent type] == NSRightMouseDown)
-	{
-		// get the current selections for the outline view.
-		NSIndexSet *selectedRowIndexes = [self selectedRowIndexes];
+    if ([theEvent type] == NSRightMouseDown)
+    {
+        // get the current selections for the outline view.
+        NSIndexSet *selectedRowIndexes = [self selectedRowIndexes];
 
-		// select the row that was clicked before showing the menu for the event
-		NSPoint mousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-		int row = [self rowAtPoint:mousePoint];
+        // select the row that was clicked before showing the menu for the event
+        NSPoint mousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        int row = [self rowAtPoint:mousePoint];
 
-		// figure out if the row that was just clicked on is currently selected
-		if ([selectedRowIndexes containsIndex:row] == NO) {
-			NSIndexSet *index = [NSIndexSet indexSetWithIndex:row];
-			[self selectRowIndexes:index byExtendingSelection:NO];
-		}
-	}
+        // figure out if the row that was just clicked on is currently selected
+        if ([selectedRowIndexes containsIndex:row] == NO) {
+            NSIndexSet *index = [NSIndexSet indexSetWithIndex:row];
+            [self selectRowIndexes:index byExtendingSelection:NO];
+        }
+    }
 
-	return [controller contextMenuForTreeView];
+    return [controller contextMenuForTreeView];
 }
 
 /* Implemented to satisfy datasourcee protocol */

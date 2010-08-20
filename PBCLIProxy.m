@@ -19,56 +19,56 @@
 
 - (id)init
 {
-	if (self = [super init]) {
-		self.connection = [NSConnection new];
-		[self.connection setRootObject:self];
+    if (self = [super init]) {
+        self.connection = [NSConnection new];
+        [self.connection setRootObject:self];
 
-		if ([self.connection registerName:ConnectionName] == NO)
-			NSBeep();
+        if ([self.connection registerName:ConnectionName] == NO)
+            NSBeep();
 
-	}
-	return self;
+    }
+    return self;
 }
 
 - (BOOL)openRepository:(NSURL*)repositoryPath arguments: (NSArray*) args error:(NSError**)error;
 {
-	// FIXME I found that creating this redundant NSURL reference was necessary to
-	// work around an apparent bug with GC and Distributed Objects
-	// I am not familiar with GC though, so perhaps I was doing something wrong.
-	NSURL* url = [NSURL fileURLWithPath:[repositoryPath path]];
-	NSArray* arguments = [NSArray arrayWithArray:args];
+    // FIXME I found that creating this redundant NSURL reference was necessary to
+    // work around an apparent bug with GC and Distributed Objects
+    // I am not familiar with GC though, so perhaps I was doing something wrong.
+    NSURL* url = [NSURL fileURLWithPath:[repositoryPath path]];
+    NSArray* arguments = [NSArray arrayWithArray:args];
 
-	PBGitRepository *document = [[PBRepositoryDocumentController sharedDocumentController] documentForLocation:url];
-	if (!document) {
-		if (error) {
-			NSString *suggestion = [PBGitBinary path] ? @"this isn't a git repository" : @"GitX can't find your git binary";
+    PBGitRepository *document = [[PBRepositoryDocumentController sharedDocumentController] documentForLocation:url];
+    if (!document) {
+        if (error) {
+            NSString *suggestion = [PBGitBinary path] ? @"this isn't a git repository" : @"GitX can't find your git binary";
 
-			NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Could not create document. Perhaps %@", suggestion]
-																 forKey:NSLocalizedFailureReasonErrorKey];
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Could not create document. Perhaps %@", suggestion]
+                                                                 forKey:NSLocalizedFailureReasonErrorKey];
 
-			*error = [NSError errorWithDomain:PBGitRepositoryErrorDomain code:2 userInfo:userInfo];
-		}
-		return NO;
-	}
+            *error = [NSError errorWithDomain:PBGitRepositoryErrorDomain code:2 userInfo:userInfo];
+        }
+        return NO;
+    }
 
-	if ([arguments count] > 0 && ([[arguments objectAtIndex:0] isEqualToString:@"--commit"] ||
-		[[arguments objectAtIndex:0] isEqualToString:@"-c"]))
-		[document.windowController showCommitView:self];
-	else {
-		PBGitRevSpecifier* rev = [[PBGitRevSpecifier alloc] initWithParameters:arguments];
-		rev.workingDirectory = url;
-		document.currentBranch = [document addBranch: rev];
-		[document.windowController showHistoryView:self];
-	}
-	[NSApp activateIgnoringOtherApps:YES];
+    if ([arguments count] > 0 && ([[arguments objectAtIndex:0] isEqualToString:@"--commit"] ||
+        [[arguments objectAtIndex:0] isEqualToString:@"-c"]))
+        [document.windowController showCommitView:self];
+    else {
+        PBGitRevSpecifier* rev = [[PBGitRevSpecifier alloc] initWithParameters:arguments];
+        rev.workingDirectory = url;
+        document.currentBranch = [document addBranch: rev];
+        [document.windowController showHistoryView:self];
+    }
+    [NSApp activateIgnoringOtherApps:YES];
 
-	return YES;
+    return YES;
 }
 
 - (void)openDiffWindowWithDiff:(NSString *)diff
 {
-	PBDiffWindowController *diffController = [[PBDiffWindowController alloc] initWithDiff:[diff copy]];
-	[diffController showWindow:nil];
-	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    PBDiffWindowController *diffController = [[PBDiffWindowController alloc] initWithDiff:[diff copy]];
+    [diffController showWindow:nil];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 @end

@@ -17,20 +17,20 @@ extern NSString * const kGitXCommitType;
 
 
 @interface PBGitCommit : NSObject <PBGitRefish> {
-	PBGitSHA *sha;
+    PBGitSHA *sha;
 
-	NSString* subject;
-	NSString* author;
-	NSString *committer;
-	NSString* details;
-	NSString *_patch;
-	NSArray *parents;
-	NSString *realSHA;
+    NSString* subject;
+    NSString* author;
+    NSString *committer;
+    NSString* details;
+    NSString *_patch;
+    NSArray *parents;
+    NSString *realSHA;
 
-	int timestamp;
-	char sign;
-	id lineInfo;
-	PBGitRepository* repository;
+    int timestamp;
+    char sign;
+    id lineInfo;
+    PBGitRepository* repository;
 }
 
 + (PBGitCommit *)commitWithRepository:(PBGitRepository*)repo andSha:(PBGitSHA *)newSha;

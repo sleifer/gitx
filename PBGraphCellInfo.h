@@ -11,11 +11,11 @@
 
 @interface PBGraphCellInfo : NSObject
 {
-	int position;
-	struct PBGitGraphLine *lines;
-	int nLines;
-	int numColumns;
-	char sign;	
+    int position;
+    struct PBGitGraphLine *lines;
+    int nLines;
+    int numColumns;
+    char sign;
 }
 
 @property(assign) struct PBGitGraphLine *lines;

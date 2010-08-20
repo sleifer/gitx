@@ -12,12 +12,12 @@
 
 int main()
 {
-	PBGitRepository *repo = [[PBGitRepository alloc] initWithURL:[NSURL URLWithString:@"file:///Users/pieter/projects/git"]];
-	PBGitRevList *revList =  [[PBGitRevList alloc] initWithRepository:repo];
-	PBGitRevSpecifier *revSpecifier = [[PBGitRevSpecifier alloc] initWithParameters:[NSArray arrayWithObject:@"master"]];
-	
-	//[repo reloadRefs];
-	[revList walkRevisionListWithSpecifier:revSpecifier];
-	
-	return 0;
+    PBGitRepository *repo = [[PBGitRepository alloc] initWithURL:[NSURL URLWithString:@"file:///Users/pieter/projects/git"]];
+    PBGitRevList *revList =  [[PBGitRevList alloc] initWithRepository:repo];
+    PBGitRevSpecifier *revSpecifier = [[PBGitRevSpecifier alloc] initWithParameters:[NSArray arrayWithObject:@"master"]];
+
+    //[repo reloadRefs];
+    [revList walkRevisionListWithSpecifier:revSpecifier];
+
+    return 0;
 }

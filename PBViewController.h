@@ -11,12 +11,12 @@
 #import "PBGitWindowController.h"
 
 @interface PBViewController : NSViewController {
-	__weak PBGitRepository *repository;
-	__weak PBGitWindowController *superController;
+    __weak PBGitRepository *repository;
+    __weak PBGitWindowController *superController;
 
-	NSString *status;
-	BOOL isBusy;
-	BOOL hasViewLoaded;
+    NSString *status;
+    BOOL isBusy;
+    BOOL hasViewLoaded;
 }
 
 @property (readonly) __weak PBGitRepository *repository;

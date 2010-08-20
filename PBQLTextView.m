@@ -14,12 +14,12 @@
 
 - (void) keyDown: (NSEvent *) event
 {
-	if ([[event characters] isEqualToString:@" "]) {
-		[controller toggleQLPreviewPanel:self];
-		return;
-	}
-	
-	[super keyDown:event];
+    if ([[event characters] isEqualToString:@" "]) {
+        [controller toggleQLPreviewPanel:self];
+        return;
+    }
+
+    [super keyDown:event];
 }
 
 @end

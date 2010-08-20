@@ -12,14 +12,14 @@
 @class PBGitRef;
 
 @interface PBSourceViewItem : NSObject {
-	NSMutableArray *children;
+    NSMutableArray *children;
 
-	NSString *title;
-	PBGitRevSpecifier *revSpecifier;
-	PBSourceViewItem *parent;
+    NSString *title;
+    PBGitRevSpecifier *revSpecifier;
+    PBSourceViewItem *parent;
 
-	BOOL isGroupItem;
-	BOOL isUncollapsible;
+    BOOL isGroupItem;
+    BOOL isUncollapsible;
 }
 
 + (id)groupItemWithTitle:(NSString *)title;

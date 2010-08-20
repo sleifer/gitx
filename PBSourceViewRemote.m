@@ -13,6 +13,6 @@
 
 - (NSImage *)icon
 {
-	return [NSImage imageNamed:@"remote"];
+    return [NSImage imageNamed:@"remote"];
 }
 @end

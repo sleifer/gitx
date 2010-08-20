@@ -12,17 +12,17 @@
 @class PBGitIndexController, PBIconAndTextCell, PBWebChangesController, PBGitIndex;
 
 @interface PBGitCommitController : PBViewController {
-	// This might have to transfer over to the PBGitRepository
-	// object sometime
-	PBGitIndex *index;
-	
-	IBOutlet NSTextView *commitMessageView;
-	IBOutlet NSArrayController *unstagedFilesController;
-	IBOutlet NSArrayController *cachedFilesController;
-	IBOutlet NSButton *commitButton;
+    // This might have to transfer over to the PBGitRepository
+    // object sometime
+    PBGitIndex *index;
 
-	IBOutlet PBGitIndexController *indexController;
-	IBOutlet PBWebChangesController *webController;
+    IBOutlet NSTextView *commitMessageView;
+    IBOutlet NSArrayController *unstagedFilesController;
+    IBOutlet NSArrayController *cachedFilesController;
+    IBOutlet NSButton *commitButton;
+
+    IBOutlet PBGitIndexController *indexController;
+    IBOutlet PBWebChangesController *webController;
 }
 
 @property(readonly) PBGitIndex *index;

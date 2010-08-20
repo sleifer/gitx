@@ -13,10 +13,10 @@
 
 - (void)drawRect:(NSRect)aRect
 {
-	[super drawRect:aRect];
+    [super drawRect:aRect];
 
-	// draw a vertical line after the given size (used as an indicator
-	// for the first line of the commit message)
+    // draw a vertical line after the given size (used as an indicator
+    // for the first line of the commit message)
     if ([PBGitDefaults commitMessageViewHasVerticalLine]) {
         float characterWidth = [@" " sizeWithAttributes:[self typingAttributes]].width;
         float lineWidth = characterWidth * [PBGitDefaults commitMessageViewVerticalLineLength];

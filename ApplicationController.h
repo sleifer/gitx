@@ -14,14 +14,14 @@
 
 @interface ApplicationController : NSObject
 {
-	IBOutlet NSWindow *window;
-	IBOutlet id firstResponder;
-	NSPersistentStoreCoordinator *persistentStoreCoordinator;
-	NSManagedObjectModel *managedObjectModel;
-	NSManagedObjectContext *managedObjectContext;
+    IBOutlet NSWindow *window;
+    IBOutlet id firstResponder;
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    NSManagedObjectModel *managedObjectModel;
+    NSManagedObjectContext *managedObjectContext;
 
-	PBCLIProxy *cliProxy;
-	PBCloneRepositoryPanel *cloneRepositoryPanel;
+    PBCLIProxy *cliProxy;
+    PBCloneRepositoryPanel *cloneRepositoryPanel;
 }
 @property (retain) PBCLIProxy* cliProxy;
 

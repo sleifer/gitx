@@ -15,10 +15,10 @@ struct hash {
 
 int main() {
     srandomdev();
-    
+
     int i = 0; struct list* last;
     int num = atoi("8000000");
-    
+
     int size = 1000;
     /* Initialize initial list of revisions */
     struct list** revisionList = malloc(size * sizeof(struct list*));
@@ -31,18 +31,18 @@ int main() {
             revisionList = realloc(revisionList, size * sizeof(struct list*));
         }
 
-	struct list* a = malloc(sizeof(struct list));
-	revisionList[i] = a;
+    struct list* a = malloc(sizeof(struct list));
+    revisionList[i] = a;
 
         a->numColumns = i % 5;
-	a->columns = malloc(a->numColumns * sizeof(struct hash));
+    a->columns = malloc(a->numColumns * sizeof(struct hash));
         int j;
         for (j = 0; j < a->numColumns; j++) {
             //ccolumns[currentColumn++] = st
             strncpy(a->columns[j].value, "Haha pieter is cool", 20);
         }
     }
-    
+
     printf("Num value at 3000 is: %i vs %i\n", revisionList[3000]->numColumns, (int) (5 * random()));
     return 0;
 }

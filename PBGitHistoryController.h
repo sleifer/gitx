@@ -21,34 +21,34 @@
 @class PBGitSHA;
 
 @interface PBGitHistoryController : PBViewController {
-	IBOutlet PBRefController *refController;
-	IBOutlet NSSearchField *searchField;
-	IBOutlet NSArrayController* commitController;
-	IBOutlet NSTreeController* treeController;
-	IBOutlet NSOutlineView* fileBrowser;
-	NSArray *currentFileBrowserSelectionPath;
-	IBOutlet PBCommitList* commitList;
-	IBOutlet PBCollapsibleSplitView *historySplitView;
-	IBOutlet PBWebHistoryController *webHistoryController;
+    IBOutlet PBRefController *refController;
+    IBOutlet NSSearchField *searchField;
+    IBOutlet NSArrayController* commitController;
+    IBOutlet NSTreeController* treeController;
+    IBOutlet NSOutlineView* fileBrowser;
+    NSArray *currentFileBrowserSelectionPath;
+    IBOutlet PBCommitList* commitList;
+    IBOutlet PBCollapsibleSplitView *historySplitView;
+    IBOutlet PBWebHistoryController *webHistoryController;
     QLPreviewPanel* previewPanel;
 
-	IBOutlet PBGitGradientBarView *upperToolbarView;
-	IBOutlet NSButton *mergeButton;
-	IBOutlet NSButton *cherryPickButton;
-	IBOutlet NSButton *rebaseButton;
+    IBOutlet PBGitGradientBarView *upperToolbarView;
+    IBOutlet NSButton *mergeButton;
+    IBOutlet NSButton *cherryPickButton;
+    IBOutlet NSButton *rebaseButton;
 
-	IBOutlet PBGitGradientBarView *scopeBarView;
-	IBOutlet NSButton *allBranchesFilterItem;
-	IBOutlet NSButton *localRemoteBranchesFilterItem;
-	IBOutlet NSButton *selectedBranchFilterItem;
+    IBOutlet PBGitGradientBarView *scopeBarView;
+    IBOutlet NSButton *allBranchesFilterItem;
+    IBOutlet NSButton *localRemoteBranchesFilterItem;
+    IBOutlet NSButton *selectedBranchFilterItem;
 
-	IBOutlet id webView;
-	int selectedCommitDetailsIndex;
-	BOOL forceSelectionUpdate;
-	
-	PBGitTree *gitTree;
-	PBGitCommit *webCommit;
-	PBGitCommit *selectedCommit;
+    IBOutlet id webView;
+    int selectedCommitDetailsIndex;
+    BOOL forceSelectionUpdate;
+
+    PBGitTree *gitTree;
+    PBGitCommit *webCommit;
+    PBGitCommit *selectedCommit;
 }
 
 @property (assign) int selectedCommitDetailsIndex;

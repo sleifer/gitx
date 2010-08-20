@@ -13,11 +13,11 @@
 #import "PBRefContextDelegate.h"
 
 @interface PBGitRevisionCell : NSActionCell {
-	PBGitCommit *objectValue;
-	PBGraphCellInfo *cellInfo;
-	NSTextFieldCell *textCell;
-	IBOutlet PBGitHistoryController *controller;
-	IBOutlet id<PBRefContextDelegate> contextMenuDelegate;
+    PBGitCommit *objectValue;
+    PBGraphCellInfo *cellInfo;
+    NSTextFieldCell *textCell;
+    IBOutlet PBGitHistoryController *controller;
+    IBOutlet id<PBRefContextDelegate> contextMenuDelegate;
 }
 
 - (int) indexAtX:(float)x;

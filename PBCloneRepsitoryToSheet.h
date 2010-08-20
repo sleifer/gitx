@@ -12,12 +12,12 @@
 @class PBGitRepository;
 
 @interface PBCloneRepsitoryToSheet : NSWindowController {
-	PBGitRepository *repository;
+    PBGitRepository *repository;
 
-	BOOL isBare;
+    BOOL isBare;
 
-	NSTextField *message;
-	NSView      *cloneToAccessoryView;
+    NSTextField *message;
+    NSView      *cloneToAccessoryView;
 }
 
 + (void) beginCloneRepsitoryToSheetForRepository:(PBGitRepository *)repo;

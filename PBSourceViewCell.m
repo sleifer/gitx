@@ -21,12 +21,12 @@
 
 - (NSMenu *) menuForEvent:(NSEvent *)event inRect:(NSRect)rect ofView:(NSOutlineView *)view
 {
-	NSPoint point = [view convertPoint:[event locationInWindow] fromView:nil];
-	NSInteger row = [view rowAtPoint:point];
+    NSPoint point = [view convertPoint:[event locationInWindow] fromView:nil];
+    NSInteger row = [view rowAtPoint:point];
 
-	PBGitSidebarController *controller = [view delegate];
+    PBGitSidebarController *controller = [view delegate];
 
-	return [controller menuForRow:row];
+    return [controller menuForRow:row];
 }
 
 
@@ -34,22 +34,22 @@
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)outlineView
 {
-	if (isCheckedOut) {
-		NSImage *checkedOutImage = [PBSourceViewBadge checkedOutBadgeForCell:self];
-		NSSize imageSize = [checkedOutImage size];
-		NSRect imageFrame;
-		NSDivideRect(cellFrame, &imageFrame, &cellFrame, imageSize.width + 3, NSMaxXEdge);
-		imageFrame.size = imageSize;
+    if (isCheckedOut) {
+        NSImage *checkedOutImage = [PBSourceViewBadge checkedOutBadgeForCell:self];
+        NSSize imageSize = [checkedOutImage size];
+        NSRect imageFrame;
+        NSDivideRect(cellFrame, &imageFrame, &cellFrame, imageSize.width + 3, NSMaxXEdge);
+        imageFrame.size = imageSize;
 
-		if ([outlineView isFlipped])
-			imageFrame.origin.y += floor((cellFrame.size.height + imageFrame.size.height) / 2);
-		else
-			imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
+        if ([outlineView isFlipped])
+            imageFrame.origin.y += floor((cellFrame.size.height + imageFrame.size.height) / 2);
+        else
+            imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
 
-		[checkedOutImage compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
-	}
+        [checkedOutImage compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+    }
 
-	[super drawWithFrame:cellFrame inView:outlineView];
+    [super drawWithFrame:cellFrame inView:outlineView];
 }
 
 @end

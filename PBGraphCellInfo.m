@@ -13,22 +13,22 @@
 @synthesize lines, position, numColumns, sign, nLines;
 - (id)initWithPosition:(int)p andLines:(struct PBGitGraphLine *)l
 {
-	position = p;
-	lines = l;
-	
-	return self;
+    position = p;
+    lines = l;
+
+    return self;
 }
 
 - (void)setLines:(struct PBGitGraphLine *)l
 {
-	free(lines);
-	lines = l;
+    free(lines);
+    lines = l;
 }
 
 -(void) finalize
 {
-	free(lines);
-	[super finalize];
+    free(lines);
+    [super finalize];
 }
 
 @end

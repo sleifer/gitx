@@ -13,13 +13,13 @@
 
 - (void)PBExpandItem:(id)item expandParents:(BOOL)expand
 {
-	NSMutableArray *parents = [NSMutableArray array];
-	while (item) {
-		[parents insertObject:item atIndex:0];
-		item = [item parent];
-	}
-	
-	for (id p in parents)
-		[self expandItem:p];
+    NSMutableArray *parents = [NSMutableArray array];
+    while (item) {
+        [parents insertObject:item atIndex:0];
+        item = [item parent];
+    }
+
+    for (id p in parents)
+        [self expandItem:p];
 }
 @end

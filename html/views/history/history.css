@@ -1,193 +1,193 @@
 body {
-	font-family: 'Lucida Grande';
+    font-family: 'Lucida Grande';
 }
 
 #commit_header {
-	width: auto;
-	font-size: 12px;
-	padding-left: 5px;
-	padding-right: 5px;
+    width: auto;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #authorTable {
-	margin: -4px;
+    margin: -4px;
 }
 
 #rightcontent {
-	position: absolute;
-	right: 5px;
-	top: 5px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
 #buttons {
 }
 
 #gist {
-	-webkit-appearance: push-button;
-	font: 10px bold 'Lucida Grande';
-	width: 80px;
-	height: 23px;
-	margin-right: 5px;
+    -webkit-appearance: push-button;
+    font: 10px bold 'Lucida Grande';
+    width: 80px;
+    height: 23px;
+    margin-right: 5px;
 }
 
 .gravatar {
-	padding: 0.1em;
+    padding: 0.1em;
 
-	border: solid gray 1px;
-	-webkit-border-radius: 2px;
+    border: solid gray 1px;
+    -webkit-border-radius: 2px;
 }
 
 .gravatar img {
-	width: 2.9em;
-	height: 2.9em;
-	max-height: 60px;
-	max-width: 60px;
+    width: 2.9em;
+    height: 2.9em;
+    max-height: 60px;
+    max-width: 60px;
 }
 
 .property_name {
-	width: 6em;
-	color:#7F7F7F;
-	text-align: right;
-	font-weight: bold;
+    width: 6em;
+    color:#7F7F7F;
+    text-align: right;
+    font-weight: bold;
 }
 
 
 #message_files {
-	margin: 5px;
-	padding-left: 1em;
-	width: auto;
+    margin: 5px;
+    padding-left: 1em;
+    width: auto;
 }
 
 #message {
-	font-family: Menlo, Monaco;
-	white-space: pre-wrap;
-	padding-top: 10px;
+    font-family: Menlo, Monaco;
+    white-space: pre-wrap;
+    padding-top: 10px;
 }
 
 #files {
-	margin-top: 1em;
-	margin-left: 0.5em;
+    margin-top: 1em;
+    margin-left: 0.5em;
 }
 
 #files a {
-	color: #666666;
-	text-decoration: none;
+    color: #666666;
+    text-decoration: none;
 }
 
 #files a:hover {
-	color: #4444ff;
-	border-bottom: 1px solid #4444ff;
+    color: #4444ff;
+    border-bottom: 1px solid #4444ff;
 }
 
 #files img {
-	float: left;
-	margin-right: 0.5em;
-	margin-top: 1px;
+    float: left;
+    margin-right: 0.5em;
+    margin-top: 1px;
 }
 
 #files p {
-	margin-top: 0.25em;
-	margin-bottom: 0.25em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .clear_both {
-	clear:both;
-	display:block;
-	height:1px;
-	line-height:0;
-	margin:1em;
-	visibility:hidden;
+    clear:both;
+    display:block;
+    height:1px;
+    line-height:0;
+    margin:1em;
+    visibility:hidden;
 }
 
 #details {
-	font-family: Monaco;
-	font-size: 10px;
-	overflow: hidden;
-	width: 600px;
+    font-family: Monaco;
+    font-size: 10px;
+    overflow: hidden;
+    width: 600px;
 }
 hr {
-	border: 0;
-	height: 1px;
-	margin: 0 8px;
-	background-color: #DEDEDE;
-	clear: both;
+    border: 0;
+    height: 1px;
+    margin: 0 8px;
+    background-color: #DEDEDE;
+    clear: both;
 }
 
 a {
-	color: rgb(20, 79, 174);
+    color: rgb(20, 79, 174);
 }
 
 a.showdiff {
-	text-decoration: none;
-	font-size: 1.3em;
+    text-decoration: none;
+    font-size: 1.3em;
 }
 
 .refs {
-	font-size: 9px;
-	font-family: Helvetica;
-	border: 1px solid black;
-	margin-right: 5px;
-	padding: 1px 3px 1px 3px;
-	-webkit-border-radius: 2px;
+    font-size: 9px;
+    font-family: Helvetica;
+    border: 1px solid black;
+    margin-right: 5px;
+    padding: 1px 3px 1px 3px;
+    -webkit-border-radius: 2px;
 }
 
 .refs.head {
-	background-color: #aaf254;
+    background-color: #aaf254;
 }
 
 .refs.remote {
-	background-color: #b2dfff;
+    background-color: #b2dfff;
 }
 
 .refs.tag {
-	background-color: #fced4f;
+    background-color: #fced4f;
 }
 
 .refs.currentBranch {
-	background-color: #fca64f;
+    background-color: #fca64f;
 }
 
 /*
 div.button
 {
-	color: #666666;
+    color: #666666;
 
-	font-size: 60%;
-	text-align: center;
+    font-size: 60%;
+    text-align: center;
 
-	width: 70px;
+    width: 70px;
 
-	margin-right: 10px;
+    margin-right: 10px;
 
-	padding: 2px;
+    padding: 2px;
 
-	float: left;
-	clear: both;
+    float: left;
+    clear: both;
 
-	border: 1px solid;
-	-webkit-border-radius: 3px;
+    border: 1px solid;
+    -webkit-border-radius: 3px;
 }
 
 div.created
 {
-	background-color: #ccffcc;
-	border-color: #66ff66;
+    background-color: #ccffcc;
+    border-color: #66ff66;
 }
 
 div.changed
 {
-	background-color: #ffcc99;
-	border-color: #ff9933;
+    background-color: #ffcc99;
+    border-color: #ff9933;
 }
 
 div.deleted
 {
-	background-color: #ffcccc;
-	border-color: #ff6666;
+    background-color: #ffcccc;
+    border-color: #ff6666;
 }
 
 div.renamed
 {
-	// No colour needed right now.
+    // No colour needed right now.
 }
 */

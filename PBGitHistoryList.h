@@ -17,23 +17,23 @@
 @class PBGitSHA;
 
 @interface PBGitHistoryList : NSObject {
-	PBGitRepository *repository;
+    PBGitRepository *repository;
 
-	PBGitRevList *projectRevList;
-	PBGitRevList *currentRevList;
+    PBGitRevList *projectRevList;
+    PBGitRevList *currentRevList;
 
-	PBGitSHA *lastSHA;
-	NSSet *lastRefSHAs;
-	NSInteger lastBranchFilter;
-	PBGitRef *lastRemoteRef;
-	BOOL resetCommits;
-	BOOL shouldReloadProjectHistory;
+    PBGitSHA *lastSHA;
+    NSSet *lastRefSHAs;
+    NSInteger lastBranchFilter;
+    PBGitRef *lastRemoteRef;
+    BOOL resetCommits;
+    BOOL shouldReloadProjectHistory;
 
-	PBGitHistoryGrapher *grapher;
-	NSOperationQueue *graphQueue;
+    PBGitHistoryGrapher *grapher;
+    NSOperationQueue *graphQueue;
 
-	NSMutableArray *commits;
-	BOOL isUpdating;
+    NSMutableArray *commits;
+    BOOL isUpdating;
 }
 
 - (id) initWithRepository:(PBGitRepository *)repo;

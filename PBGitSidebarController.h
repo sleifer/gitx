@@ -14,21 +14,21 @@
 @class PBGitCommitController;
 
 @interface PBGitSidebarController : PBViewController {
-	IBOutlet NSWindow *window;
-	IBOutlet NSOutlineView *sourceView;
-	IBOutlet NSView *sourceListControlsView;
-	IBOutlet NSPopUpButton *actionButton;
-	IBOutlet NSSegmentedControl *remoteControls;
+    IBOutlet NSWindow *window;
+    IBOutlet NSOutlineView *sourceView;
+    IBOutlet NSView *sourceListControlsView;
+    IBOutlet NSPopUpButton *actionButton;
+    IBOutlet NSSegmentedControl *remoteControls;
 
-	NSMutableArray *items;
+    NSMutableArray *items;
 
-	/* Specific things */
-	PBSourceViewItem *stage;
+    /* Specific things */
+    PBSourceViewItem *stage;
 
-	PBSourceViewItem *branches, *remotes, *tags, *others;
+    PBSourceViewItem *branches, *remotes, *tags, *others;
 
-	PBGitHistoryController *historyViewController;
-	PBGitCommitController *commitViewController;
+    PBGitHistoryController *historyViewController;
+    PBGitCommitController *commitViewController;
 }
 
 - (void) selectStage;

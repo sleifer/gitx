@@ -16,38 +16,38 @@
 
 - (id) initWithDiff:(NSString *)aDiff
 {
-	if (![super initWithWindowNibName:@"PBDiffWindow"])
-		return nil;
+    if (![super initWithWindowNibName:@"PBDiffWindow"])
+        return nil;
 
-	diff = aDiff;
-	return self;
+    diff = aDiff;
+    return self;
 }
 
 
 + (void) showDiffWindowWithFiles:(NSArray *)filePaths fromCommit:(PBGitCommit *)startCommit diffCommit:(PBGitCommit *)diffCommit
 {
-	if (!startCommit)
-		return;
+    if (!startCommit)
+        return;
 
-	if (!diffCommit)
-		diffCommit = [startCommit.repository headCommit];
+    if (!diffCommit)
+        diffCommit = [startCommit.repository headCommit];
 
-	NSString *commitSelector = [NSString stringWithFormat:@"%@..%@", [startCommit realSha], [diffCommit realSha]];
-	NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"diff", commitSelector, nil];
-	if (filePaths) {
-		[arguments addObject:@"--"];
-		[arguments addObjectsFromArray:filePaths];
-	}
+    NSString *commitSelector = [NSString stringWithFormat:@"%@..%@", [startCommit realSha], [diffCommit realSha]];
+    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"diff", commitSelector, nil];
+    if (filePaths) {
+        [arguments addObject:@"--"];
+        [arguments addObjectsFromArray:filePaths];
+    }
 
-	int retValue;
-	NSString *diff = [startCommit.repository outputInWorkdirForArguments:arguments retValue:&retValue];
-	if (retValue) {
-		NSLog(@"diff failed with retValue: %d   for command: '%@'    output: '%@'", retValue, [arguments componentsJoinedByString:@" "], diff);
-		return;
-	}
+    int retValue;
+    NSString *diff = [startCommit.repository outputInWorkdirForArguments:arguments retValue:&retValue];
+    if (retValue) {
+        NSLog(@"diff failed with retValue: %d   for command: '%@'    output: '%@'", retValue, [arguments componentsJoinedByString:@" "], diff);
+        return;
+    }
 
-	PBDiffWindowController *diffController = [[PBDiffWindowController alloc] initWithDiff:[diff copy]];
-	[diffController showWindow:nil];
+    PBDiffWindowController *diffController = [[PBDiffWindowController alloc] initWithDiff:[diff copy]];
+    [diffController showWindow:nil];
 }
 
 

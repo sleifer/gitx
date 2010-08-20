@@ -10,10 +10,10 @@
 #import <PBGitRef.h>
 
 @interface PBGitRevSpecifier : NSObject  <NSCopying> {
-	NSString *description;
-	NSArray *parameters;
-	NSURL *workingDirectory;
-	BOOL isSimpleRef;
+    NSString *description;
+    NSArray *parameters;
+    NSURL *workingDirectory;
+    BOOL isSimpleRef;
 }
 
 - (id) initWithParameters:(NSArray *)params description:(NSString *)descrip;

@@ -11,7 +11,7 @@
 #import "PBDiffWindowController.h"
 
 @interface PBWebDiffController : PBWebController {
-	IBOutlet PBDiffWindowController *diffController;
+    IBOutlet PBDiffWindowController *diffController;
 }
 
 - (void) showDiff:(NSString *)diff;

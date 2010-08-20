@@ -17,31 +17,31 @@
 
 - (id)initWithRepository:(PBGitRepository *)theRepository superController:(PBGitWindowController *)controller
 {
-	NSString *nibName = [[[self class] description] stringByReplacingOccurrencesOfString:@"Controller"
-																			  withString:@"View"];
-	if(self = [self initWithNibName:nibName bundle:nil]) {
-		repository = theRepository;
-		superController = controller;
-	}
-	
-	return self;
+    NSString *nibName = [[[self class] description] stringByReplacingOccurrencesOfString:@"Controller"
+                                                                              withString:@"View"];
+    if(self = [self initWithNibName:nibName bundle:nil]) {
+        repository = theRepository;
+        superController = controller;
+    }
+
+    return self;
 }
 
 - (void)closeView
 {
-	[self unbind:@"repository"];
-	if (hasViewLoaded)
-		[[self view] removeFromSuperview];	// remove the current view
+    [self unbind:@"repository"];
+    if (hasViewLoaded)
+        [[self view] removeFromSuperview];  // remove the current view
 }
 
 - (void)awakeFromNib
 {
-	hasViewLoaded = YES;
+    hasViewLoaded = YES;
 }
 
 - (NSResponder *)firstResponder;
 {
-	return nil;
+    return nil;
 }
 
 - (IBAction) refresh: sender

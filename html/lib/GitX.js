@@ -6,7 +6,7 @@
  */
 
 function $(element) {
-	return document.getElementById(element);
+    return document.getElementById(element);
 }
 
 String.prototype.escapeHTML = function() {
@@ -18,10 +18,10 @@ String.prototype.unEscapeHTML = function() {
 };
 
 Element.prototype.toggleDisplay = function() {
-	if (this.style.display != "")
-		this.style.display = "";
-	else
-		this.style.display = "none";
+    if (this.style.display != "")
+        this.style.display = "";
+    else
+        this.style.display = "none";
 }
 
 Array.prototype.indexOf = function(item, i) {
@@ -34,24 +34,24 @@ Array.prototype.indexOf = function(item, i) {
 };
 
 var notify = function(text, state) {
-	var n = $("notification");
-	n.style.display = "";
-	$("notification_message").innerHTML = text;
-	
-	// Change color
-	if (!state) { // Busy
-		$("spinner").style.display = "";
-		n.setAttribute("class", "");
-	}
-	else if (state == 1) { // Success
-		$("spinner").style.display = "none";
-		n.setAttribute("class", "success");
-	} else if (state == -1) {// Fail
-		$("spinner").style.display = "none";
-		n.setAttribute("class", "fail");
-	}
+    var n = $("notification");
+    n.style.display = "";
+    $("notification_message").innerHTML = text;
+
+    // Change color
+    if (!state) { // Busy
+        $("spinner").style.display = "";
+        n.setAttribute("class", "");
+    }
+    else if (state == 1) { // Success
+        $("spinner").style.display = "none";
+        n.setAttribute("class", "success");
+    } else if (state == -1) {// Fail
+        $("spinner").style.display = "none";
+        n.setAttribute("class", "fail");
+    }
 }
 
 var hideNotification = function() {
-	$("notification").style.display = "none";
+    $("notification").style.display = "none";
 }

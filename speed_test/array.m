@@ -8,10 +8,10 @@
 
 int main() {
     srandomdev();
-    
+
     int i = 0; struct list* last;
     int num = atoi("8000000");
-    
+
     int size = 1000;
     int totColumns = 10000;
     int currentColumn = 0;
@@ -20,7 +20,7 @@ int main() {
 
     for (i = 0; i < num; i++) {
         int numColumns = i % 5;
-        
+
         NSMutableArray* arr = [NSMutableArray arrayWithCapacity: numColumns];
         int j;
         for (j = 0; j < numColumns; j++)

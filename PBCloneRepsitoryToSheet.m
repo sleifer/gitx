@@ -31,15 +31,15 @@
 
 + (void) beginCloneRepsitoryToSheetForRepository:(PBGitRepository *)repo
 {
-	PBCloneRepsitoryToSheet *sheet = [[self alloc] initWithWindowNibName:@"PBCloneRepsitoryToSheet"];
-	[sheet beginCloneRepsitoryToSheetForRepository:repo];
+    PBCloneRepsitoryToSheet *sheet = [[self alloc] initWithWindowNibName:@"PBCloneRepsitoryToSheet"];
+    [sheet beginCloneRepsitoryToSheetForRepository:repo];
 }
 
 
 - (void) beginCloneRepsitoryToSheetForRepository:(PBGitRepository *)repo
 {
-	self.repository = repo;
-	[self window];
+    self.repository = repo;
+    [self window];
 }
 
 
@@ -47,33 +47,33 @@
 {
     NSOpenPanel *cloneToSheet = [NSOpenPanel openPanel];
 
-	[cloneToSheet setTitle:@"Clone Repository To"];
-	[cloneToSheet setPrompt:@"Clone"];
+    [cloneToSheet setTitle:@"Clone Repository To"];
+    [cloneToSheet setPrompt:@"Clone"];
     [self.message setStringValue:[NSString stringWithFormat:@"Select a folder to clone %@ into", [self.repository projectName]]];
     [cloneToSheet setCanSelectHiddenExtension:NO];
     [cloneToSheet setCanChooseFiles:NO];
     [cloneToSheet setCanChooseDirectories:YES];
     [cloneToSheet setAllowsMultipleSelection:NO];
     [cloneToSheet setCanCreateDirectories:YES];
-	[cloneToSheet setAccessoryView:cloneToAccessoryView];
+    [cloneToSheet setAccessoryView:cloneToAccessoryView];
 
     [cloneToSheet beginSheetForDirectory:nil file:nil types:nil
-						  modalForWindow:[self.repository.windowController window]
-						   modalDelegate:self
-						  didEndSelector:@selector(cloneToSheetDidEnd:returnCode:contextInfo:)
-							 contextInfo:NULL];
+                          modalForWindow:[self.repository.windowController window]
+                           modalDelegate:self
+                          didEndSelector:@selector(cloneToSheetDidEnd:returnCode:contextInfo:)
+                             contextInfo:NULL];
 }
-	
+
 
 - (void) cloneToSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)code contextInfo:(void *)info
 {
     [sheet orderOut:self];
 
     if (code == NSOKButton) {
-		NSString *clonePath = [(NSOpenPanel *)sheet filename];
-		NSLog(@"clone path = %@", clonePath);
-		[self.repository cloneRepositoryToPath:clonePath bare:self.isBare];
-	}
+        NSString *clonePath = [(NSOpenPanel *)sheet filename];
+        NSLog(@"clone path = %@", clonePath);
+        [self.repository cloneRepositoryToPath:clonePath bare:self.isBare];
+    }
 }
 
 

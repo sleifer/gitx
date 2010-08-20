@@ -14,9 +14,9 @@
 
 extern NSString* PBGitRepositoryErrorDomain;
 typedef enum branchFilterTypes {
-	kGitXAllBranchesFilter = 0,
-	kGitXLocalRemoteBranchesFilter,
-	kGitXSelectedBranchFilter
+    kGitXAllBranchesFilter = 0,
+    kGitXLocalRemoteBranchesFilter,
+    kGitXSelectedBranchFilter
 } PBGitXBranchFilterType;
 
 static NSString * PBStringFromBranchFilterType(PBGitXBranchFilterType type) {
@@ -41,17 +41,17 @@ static NSString * PBStringFromBranchFilterType(PBGitXBranchFilterType type) {
 @class PBGitSHA;
 
 @interface PBGitRepository : NSDocument {
-	PBGitHistoryList* revisionList;
-	PBGitConfig *config;
+    PBGitHistoryList* revisionList;
+    PBGitConfig *config;
 
-	BOOL hasChanged;
-	NSMutableArray *branches;
-	PBGitRevSpecifier *currentBranch;
-	NSInteger currentBranchFilter;
-	NSMutableDictionary *refs;
+    BOOL hasChanged;
+    NSMutableArray *branches;
+    PBGitRevSpecifier *currentBranch;
+    NSInteger currentBranchFilter;
+    NSMutableDictionary *refs;
 
-	PBGitRevSpecifier *_headRef; // Caching
-	PBGitSHA* _headSha;
+    PBGitRevSpecifier *_headRef; // Caching
+    PBGitSHA* _headSha;
 }
 
 - (void) cloneRepositoryToPath:(NSString *)path bare:(BOOL)isBare;

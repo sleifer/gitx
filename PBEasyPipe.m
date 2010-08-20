@@ -13,137 +13,137 @@
 
 + (NSFileHandle*) handleForCommand: (NSString*) cmd withArgs: (NSArray*) args
 {
-	return [self handleForCommand:cmd withArgs:args inDir:nil];
+    return [self handleForCommand:cmd withArgs:args inDir:nil];
 }
 
 + (NSTask *) taskForCommand:(NSString *)cmd withArgs:(NSArray *)args inDir:(NSString *)dir
 {
-	NSTask* task = [[NSTask alloc] init];
-	[task setLaunchPath:cmd];
-	[task setArguments:args];
-	if (dir)
-		[task setCurrentDirectoryPath:dir];
+    NSTask* task = [[NSTask alloc] init];
+    [task setLaunchPath:cmd];
+    [task setArguments:args];
+    if (dir)
+        [task setCurrentDirectoryPath:dir];
 
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Show Debug Messages"])
-		NSLog(@"Starting command `%@ %@` in dir %@", cmd, [args componentsJoinedByString:@" "], dir);
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Show Debug Messages"])
+        NSLog(@"Starting command `%@ %@` in dir %@", cmd, [args componentsJoinedByString:@" "], dir);
 #ifdef CLI
-	NSLog(@"Starting command `%@ %@` in dir %@", cmd, [args componentsJoinedByString:@" "], dir);
+    NSLog(@"Starting command `%@ %@` in dir %@", cmd, [args componentsJoinedByString:@" "], dir);
 #endif
 
-	NSPipe* pipe = [NSPipe pipe];
-	[task setStandardOutput:pipe];
-	[task setStandardError:pipe];
-	return task;
+    NSPipe* pipe = [NSPipe pipe];
+    [task setStandardOutput:pipe];
+    [task setStandardError:pipe];
+    return task;
 }
 
 + (NSFileHandle*) handleForCommand: (NSString*) cmd withArgs: (NSArray*) args inDir: (NSString*) dir
 {
-	NSTask *task = [self taskForCommand:cmd withArgs:args inDir:dir];
-	NSFileHandle* handle = [[task standardOutput] fileHandleForReading];
-	
-	[task launch];
-	return handle;
+    NSTask *task = [self taskForCommand:cmd withArgs:args inDir:dir];
+    NSFileHandle* handle = [[task standardOutput] fileHandleForReading];
+
+    [task launch];
+    return handle;
 }
 
 
 
 + (NSString*) outputForCommand:(NSString *) cmd
-					  withArgs:(NSArray *)  args
-						 inDir:(NSString *) dir
-				      retValue:(int *)      ret
+                      withArgs:(NSArray *)  args
+                         inDir:(NSString *) dir
+                      retValue:(int *)      ret
 {
-	return [self outputForCommand:cmd withArgs:args inDir:dir byExtendingEnvironment:nil inputString:nil retValue:ret];
-}	
+    return [self outputForCommand:cmd withArgs:args inDir:dir byExtendingEnvironment:nil inputString:nil retValue:ret];
+}
 
 + (NSString*) outputForCommand:(NSString *) cmd
-					  withArgs:(NSArray *)  args
-						 inDir:(NSString *) dir
-				   inputString:(NSString *) input
-				      retValue:(int *)      ret
+                      withArgs:(NSArray *)  args
+                         inDir:(NSString *) dir
+                   inputString:(NSString *) input
+                      retValue:(int *)      ret
 {
-	return [self outputForCommand:cmd withArgs:args inDir:dir byExtendingEnvironment:nil inputString:input retValue:ret];
+    return [self outputForCommand:cmd withArgs:args inDir:dir byExtendingEnvironment:nil inputString:input retValue:ret];
 }
 
 + (NSString*) outputForCommand:(NSString *)    cmd
-					  withArgs:(NSArray *)     args
-						 inDir:(NSString *)    dir
-		byExtendingEnvironment:(NSDictionary *)dict
-				   inputString:(NSString *)    input
-					  retValue:(int *)         ret
+                      withArgs:(NSArray *)     args
+                         inDir:(NSString *)    dir
+        byExtendingEnvironment:(NSDictionary *)dict
+                   inputString:(NSString *)    input
+                      retValue:(int *)         ret
 {
-	NSTask *task = [self taskForCommand:cmd withArgs:args inDir:dir];
+    NSTask *task = [self taskForCommand:cmd withArgs:args inDir:dir];
 
-	if (dict) {
-		NSMutableDictionary *env = [[[NSProcessInfo processInfo] environment] mutableCopy];
-		[env addEntriesFromDictionary:dict];
-		[task setEnvironment:env];
-	}
+    if (dict) {
+        NSMutableDictionary *env = [[[NSProcessInfo processInfo] environment] mutableCopy];
+        [env addEntriesFromDictionary:dict];
+        [task setEnvironment:env];
+    }
 
-	NSFileHandle* handle = [[task standardOutput] fileHandleForReading];
+    NSFileHandle* handle = [[task standardOutput] fileHandleForReading];
 
-	if (input) {
-		[task setStandardInput:[NSPipe pipe]];
-		NSFileHandle *inHandle = [[task standardInput] fileHandleForWriting];
-		[inHandle writeData:[input dataUsingEncoding:NSUTF8StringEncoding]];
-		[inHandle closeFile];
-	}
-	
-	[task launch];
-	
-	NSData* data = [handle readDataToEndOfFile];
-	NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	if (!string)
-		string = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
-	
-	// Strip trailing newline
-	if ([string hasSuffix:@"\n"])
-		string = [string substringToIndex:[string length]-1];
-	
-	[task waitUntilExit];
-	if (ret)
-		*ret = [task terminationStatus];
-	return string;
-}	
+    if (input) {
+        [task setStandardInput:[NSPipe pipe]];
+        NSFileHandle *inHandle = [[task standardInput] fileHandleForWriting];
+        [inHandle writeData:[input dataUsingEncoding:NSUTF8StringEncoding]];
+        [inHandle closeFile];
+    }
+
+    [task launch];
+
+    NSData* data = [handle readDataToEndOfFile];
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if (!string)
+        string = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
+
+    // Strip trailing newline
+    if ([string hasSuffix:@"\n"])
+        string = [string substringToIndex:[string length]-1];
+
+    [task waitUntilExit];
+    if (ret)
+        *ret = [task terminationStatus];
+    return string;
+}
 
 // We don't use the above function because then we'd have to wait until the program was finished
 // with running
 
 + (NSString*) outputForCommand: (NSString*) cmd withArgs: (NSArray*) args  inDir: (NSString*) dir
 {
-	NSTask *task = [self taskForCommand:cmd withArgs:args inDir:dir];
-	NSFileHandle* handle = [[task standardOutput] fileHandleForReading];
-	
-	[task launch];
-	// This can cause a "Bad file descriptor"... when?
-	NSData *data;
-	@try {
-		data = [handle readDataToEndOfFile];
-	}
-	@catch (NSException * e) {
-		NSLog(@"Got a bad file descriptor in %@!", NSStringFromSelector(_cmd));
-		if ([NSThread currentThread] != [NSThread mainThread])
-			[task waitUntilExit];
+    NSTask *task = [self taskForCommand:cmd withArgs:args inDir:dir];
+    NSFileHandle* handle = [[task standardOutput] fileHandleForReading];
 
-		return nil;
-	}
-	NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	if (!string)
-		string = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
-	
-	// Strip trailing newline
-	if ([string hasSuffix:@"\n"])
-		string = [string substringToIndex:[string length]-1];
+    [task launch];
+    // This can cause a "Bad file descriptor"... when?
+    NSData *data;
+    @try {
+        data = [handle readDataToEndOfFile];
+    }
+    @catch (NSException * e) {
+        NSLog(@"Got a bad file descriptor in %@!", NSStringFromSelector(_cmd));
+        if ([NSThread currentThread] != [NSThread mainThread])
+            [task waitUntilExit];
 
-	if ([NSThread currentThread] != [NSThread mainThread])
-		[task waitUntilExit];
+        return nil;
+    }
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if (!string)
+        string = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
 
-	return string;
+    // Strip trailing newline
+    if ([string hasSuffix:@"\n"])
+        string = [string substringToIndex:[string length]-1];
+
+    if ([NSThread currentThread] != [NSThread mainThread])
+        [task waitUntilExit];
+
+    return string;
 }
 
 
 + (NSString*) outputForCommand: (NSString*) cmd withArgs: (NSArray*) args
 {
-	return [self outputForCommand:cmd withArgs:args inDir:nil];
+    return [self outputForCommand:cmd withArgs:args inDir:nil];
 }
 
 @end

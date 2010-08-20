@@ -11,7 +11,7 @@
 #import "PBEasyPipe.h"
 
 @interface PBGitConfig : NSObject {
-	NSString *repositoryPath;
+    NSString *repositoryPath;
 }
 
 - init;

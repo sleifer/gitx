@@ -14,19 +14,19 @@
 
 + (id) stageItem
 {
-	PBGitSVStageItem *item = [self itemWithTitle:@"Stage"];
-	
-	return item;
+    PBGitSVStageItem *item = [self itemWithTitle:@"Stage"];
+
+    return item;
 }
 
 
 - (NSImage *) icon
 {
-	static NSImage *stageImage = nil;
-	if (!stageImage)
-		stageImage = [NSImage imageNamed:@"StageView"];
-	
-	return stageImage;
+    static NSImage *stageImage = nil;
+    if (!stageImage)
+        stageImage = [NSImage imageNamed:@"StageView"];
+
+    return stageImage;
 }
 
 @end

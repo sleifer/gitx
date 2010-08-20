@@ -13,7 +13,7 @@
 
 
 @interface PBQLTextView : NSTextView {
-	IBOutlet PBGitHistoryController *controller;
+    IBOutlet PBGitHistoryController *controller;
 }
 
 @end

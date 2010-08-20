@@ -11,8 +11,8 @@
 
 
 @interface PBGitSHA : NSObject <NSCopying> {
-	git_oid oid;
-	NSString *string;
+    git_oid oid;
+    NSString *string;
 }
 
 

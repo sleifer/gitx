@@ -14,10 +14,10 @@ struct hash {
 
 int main() {
     srandomdev();
-    
+
     int i = 0; struct list* last;
     int num = atoi("8000000");
-    
+
     int size = 1000;
     int totColumns = 10000;
     int currentColumn = 0;
@@ -33,7 +33,7 @@ int main() {
             size *= 2;
             revisionList = realloc(revisionList, size * sizeof(struct list));
         }
-            
+
         struct list* a = revisionList + i;
         a->numColumns = i % 5;
         if (currentColumn + a->numColumns > totColumns) {
@@ -47,7 +47,7 @@ int main() {
             strncpy(columns[currentColumn++].value, "Haha pieter is cool", 20);
         }
     }
-    
+
     printf("Num value at 3000 is: %i vs %i\n", revisionList[3000].numColumns, (int) (5 * random()));
     printf("Value of 1000'd column is: %s\n", columns[1000].value);
     sleep(5);

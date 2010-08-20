@@ -14,12 +14,12 @@
 
 
 @interface PBCreateTagSheet : NSWindowController {
-	PBGitRepository *repository;
-	id <PBGitRefish> targetRefish;
+    PBGitRepository *repository;
+    id <PBGitRefish> targetRefish;
 
-	NSTextField *tagNameField;
-	NSTextView  *tagMessageText;
-	NSTextField *errorMessageField;
+    NSTextField *tagNameField;
+    NSTextView  *tagMessageText;
+    NSTextField *errorMessageField;
 }
 
 + (void) beginCreateTagSheetAtRefish:(id <PBGitRefish>)refish inRepository:(PBGitRepository *)repo;

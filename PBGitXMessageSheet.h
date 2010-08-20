@@ -11,10 +11,10 @@
 
 @interface PBGitXMessageSheet : NSWindowController
 {
-	NSImageView *iconView;
-	NSTextField *messageField;
-	NSTextView *infoView;
-	NSScrollView *scrollView;
+    NSImageView *iconView;
+    NSTextField *messageField;
+    NSTextView *infoView;
+    NSScrollView *scrollView;
 }
 
 + (void)beginMessageSheetForWindow:(NSWindow *)parentWindow withMessageText:(NSString *)message infoText:(NSString *)info;

@@ -12,15 +12,15 @@
 @class PBGitRevSpecifier;
 
 @interface PBGitRevList : NSObject {
-	NSMutableArray *commits;
+    NSMutableArray *commits;
 
-	PBGitRepository *repository;
-	PBGitRevSpecifier *currentRev;
-	BOOL isGraphing;
+    PBGitRepository *repository;
+    PBGitRevSpecifier *currentRev;
+    BOOL isGraphing;
 
-	NSThread *parseThread;
-	BOOL isParsing;
-	BOOL resetCommits;
+    NSThread *parseThread;
+    BOOL isParsing;
+    BOOL resetCommits;
 }
 
 - (id) initWithRepository:(PBGitRepository *)repo rev:(PBGitRevSpecifier *)rev shouldGraph:(BOOL)graph;

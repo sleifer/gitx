@@ -25,41 +25,41 @@
 
 + (PBGitSHA *)shaWithOID:(git_oid)oid
 {
-	return [[PBGitSHA alloc] initWithOID:oid];
+    return [[PBGitSHA alloc] initWithOID:oid];
 }
 
 
 + (PBGitSHA *)shaWithString:(NSString *)shaString
 {
-	git_oid oid;
-	int err = git_oid_mkstr(&oid, [shaString UTF8String]);
-	if (err == GIT_ENOTOID)
-		return nil;
+    git_oid oid;
+    int err = git_oid_mkstr(&oid, [shaString UTF8String]);
+    if (err == GIT_ENOTOID)
+        return nil;
 
-	return [self shaWithOID:oid];
+    return [self shaWithOID:oid];
 }
 
 
 + (PBGitSHA *)shaWithCString:(const char *)shaCString
 {
-	git_oid oid;
-	int err = git_oid_mkstr(&oid, shaCString);
-	if (err == GIT_ENOTOID)
-		return nil;
+    git_oid oid;
+    int err = git_oid_mkstr(&oid, shaCString);
+    if (err == GIT_ENOTOID)
+        return nil;
 
-	return [self shaWithOID:oid];
+    return [self shaWithOID:oid];
 }
 
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
 {
-	return NO;
+    return NO;
 }
 
 
 + (BOOL)isKeyExcludedFromWebScript:(const char *)name
 {
-	return NO;
+    return NO;
 }
 
 
@@ -69,58 +69,58 @@
 
 - (id)initWithOID:(git_oid)g_oid
 {
-	self = [super init];
-	if (!self)
-		return nil;
+    self = [super init];
+    if (!self)
+        return nil;
 
-	oid = g_oid;
+    oid = g_oid;
 
-	return self;
+    return self;
 }
 
 
 - (NSString *)string
 {
-	if (!string) {
-		char *hex = git_oid_mkhex(&oid);
-		if (hex == NULL)
-			return nil;
-		string = [NSString stringWithUTF8String:hex];
-		free(hex);
-	}
+    if (!string) {
+        char *hex = git_oid_mkhex(&oid);
+        if (hex == NULL)
+            return nil;
+        string = [NSString stringWithUTF8String:hex];
+        free(hex);
+    }
 
-	return string;
+    return string;
 }
 
 
 - (BOOL)isEqual:(id)otherSHA
 {
-	if (self == otherSHA)
-		return YES;
+    if (self == otherSHA)
+        return YES;
 
-	git_oid other_oid = [(PBGitSHA *)otherSHA oid];
-	return git_oid_cmp(&oid, &other_oid) == 0;
+    git_oid other_oid = [(PBGitSHA *)otherSHA oid];
+    return git_oid_cmp(&oid, &other_oid) == 0;
 }
 
 
 - (BOOL)isEqualToOID:(git_oid)other_oid
 {
-	return git_oid_cmp(&oid, &other_oid) == 0;
+    return git_oid_cmp(&oid, &other_oid) == 0;
 }
 
 
 - (NSUInteger)hash
 {
-	NSUInteger hash;
-	memcpy(&hash, &(oid.id), sizeof(NSUInteger));
+    NSUInteger hash;
+    memcpy(&hash, &(oid.id), sizeof(NSUInteger));
 
-	return hash;
+    return hash;
 }
 
 
 - (NSString *)description
 {
-	return [self string];
+    return [self string];
 }
 
 
@@ -129,11 +129,11 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	git_oid oidCopy;
-	git_oid_cpy(&oidCopy, &oid);
+    git_oid oidCopy;
+    git_oid_cpy(&oidCopy, &oid);
     PBGitSHA *copy = [[[self class] allocWithZone:zone] initWithOID:oidCopy];
 
-	return copy;
+    return copy;
 }
 
 @end

@@ -10,21 +10,21 @@
 #import "PBGitRepository.h"
 
 typedef enum {
-	NEW,
-	MODIFIED,
-	DELETED
+    NEW,
+    MODIFIED,
+    DELETED
 } PBChangedFileStatus;
 
 @interface PBChangedFile : NSObject {
-	NSString *path;
-	BOOL hasStagedChanges;
-	BOOL hasUnstagedChanges;
+    NSString *path;
+    BOOL hasStagedChanges;
+    BOOL hasUnstagedChanges;
 
-	// Index and HEAD stuff, to be used to revert changes
-	NSString *commitBlobSHA;
-	NSString *commitBlobMode;
+    // Index and HEAD stuff, to be used to revert changes
+    NSString *commitBlobSHA;
+    NSString *commitBlobMode;
 
-	PBChangedFileStatus status;
+    PBChangedFileStatus status;
 }
 
 

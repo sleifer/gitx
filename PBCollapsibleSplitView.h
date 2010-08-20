@@ -14,9 +14,9 @@
 #import "PBNiceSplitView.h"
 
 @interface PBCollapsibleSplitView : PBNiceSplitView {
-	CGFloat topViewMin;
-	CGFloat bottomViewMin;
-	CGFloat splitterPosition;
+    CGFloat topViewMin;
+    CGFloat bottomViewMin;
+    CGFloat splitterPosition;
 }
 
 @property (readonly) CGFloat topViewMin;

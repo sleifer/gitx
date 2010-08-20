@@ -17,43 +17,43 @@
 
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL) local
 {
-	return NSDragOperationCopy;
+    return NSDragOperationCopy;
 }
 
 - (void)keyDown:(NSEvent *)event
 {
-	NSString* character = [event charactersIgnoringModifiers];
+    NSString* character = [event charactersIgnoringModifiers];
 
-	// Pass on command-shift up/down to the responder. We want the splitview to capture this.
-	if ([event modifierFlags] & NSShiftKeyMask && [event modifierFlags] & NSCommandKeyMask && ([event keyCode] == 0x7E || [event keyCode] == 0x7D)) {
-		[self.nextResponder keyDown:event];
-		return;
-	}
+    // Pass on command-shift up/down to the responder. We want the splitview to capture this.
+    if ([event modifierFlags] & NSShiftKeyMask && [event modifierFlags] & NSCommandKeyMask && ([event keyCode] == 0x7E || [event keyCode] == 0x7D)) {
+        [self.nextResponder keyDown:event];
+        return;
+    }
 
-	if ([character isEqualToString:@" "]) {
-		if (controller.selectedCommitDetailsIndex == 0) {
-			if ([event modifierFlags] & NSShiftKeyMask)
-				[webView scrollPageUp:self];
-			else
-				[webView scrollPageDown:self];
-		}
-		else
-			[controller toggleQLPreviewPanel:self];
-	}
-	else if ([character rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"jkcv"]].location == 0)
-		[webController sendKey: character];
-	else
-		[super keyDown: event];
+    if ([character isEqualToString:@" "]) {
+        if (controller.selectedCommitDetailsIndex == 0) {
+            if ([event modifierFlags] & NSShiftKeyMask)
+                [webView scrollPageUp:self];
+            else
+                [webView scrollPageDown:self];
+        }
+        else
+            [controller toggleQLPreviewPanel:self];
+    }
+    else if ([character rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"jkcv"]].location == 0)
+        [webController sendKey: character];
+    else
+        [super keyDown: event];
 }
 
 - (void) copy:(id)sender
 {
-	[controller copyCommitInfo];
+    [controller copyCommitInfo];
 }
 
 - (void) copySHA:(id)sender
 {
-	[controller copyCommitSHA];
+    [controller copyCommitSHA];
 }
 
 // !!! Andre Berg 20100330: Used from -scrollSelectionToTopOfViewFrom: of PBGitHistoryController
@@ -90,36 +90,36 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-	mouseDownPoint = [[self window] mouseLocationOutsideOfEventStream];
-	[super mouseDown:theEvent];
+    mouseDownPoint = [[self window] mouseLocationOutsideOfEventStream];
+    [super mouseDown:theEvent];
 }
 
 - (NSImage *)dragImageForRowsWithIndexes:(NSIndexSet *)dragRows
-							tableColumns:(NSArray *)tableColumns
-								   event:(NSEvent *)dragEvent
-								  offset:(NSPointPointer)dragImageOffset
+                            tableColumns:(NSArray *)tableColumns
+                                   event:(NSEvent *)dragEvent
+                                  offset:(NSPointPointer)dragImageOffset
 {
-	NSPoint location = [self convertPointFromBase:mouseDownPoint];
-	int row = [self rowAtPoint:location];
-	int column = [self columnAtPoint:location];
-	PBGitRevisionCell *cell = (PBGitRevisionCell *)[self preparedCellAtColumn:column row:row];
-	NSRect cellFrame = [self frameOfCellAtColumn:column row:row];
+    NSPoint location = [self convertPointFromBase:mouseDownPoint];
+    int row = [self rowAtPoint:location];
+    int column = [self columnAtPoint:location];
+    PBGitRevisionCell *cell = (PBGitRevisionCell *)[self preparedCellAtColumn:column row:row];
+    NSRect cellFrame = [self frameOfCellAtColumn:column row:row];
 
-	int index = [cell indexAtX:(location.x - cellFrame.origin.x)];
-	if (index == -1)
-		return [super dragImageForRowsWithIndexes:dragRows tableColumns:tableColumns event:dragEvent offset:dragImageOffset];
+    int index = [cell indexAtX:(location.x - cellFrame.origin.x)];
+    if (index == -1)
+        return [super dragImageForRowsWithIndexes:dragRows tableColumns:tableColumns event:dragEvent offset:dragImageOffset];
 
-	NSRect rect = [cell rectAtIndex:index];
+    NSRect rect = [cell rectAtIndex:index];
 
-	NSImage *newImage = [[NSImage alloc] initWithSize:NSMakeSize(rect.size.width + 3, rect.size.height + 3)];
-	rect.origin = NSMakePoint(0.5, 0.5);
+    NSImage *newImage = [[NSImage alloc] initWithSize:NSMakeSize(rect.size.width + 3, rect.size.height + 3)];
+    rect.origin = NSMakePoint(0.5, 0.5);
 
-	[newImage lockFocus];
-	[cell drawLabelAtIndex:index inRect:rect];
-	[newImage unlockFocus];
+    [newImage lockFocus];
+    [cell drawLabelAtIndex:index inRect:rect];
+    [newImage unlockFocus];
 
-	*dragImageOffset = NSMakePoint(rect.size.width / 2 + 10, 0);
-	return newImage;
+    *dragImageOffset = NSMakePoint(rect.size.width / 2 + 10, 0);
+    return newImage;
 
 }
 @end

@@ -11,7 +11,7 @@
 @class PBGitCommit;
 
 @interface PBDiffWindowController : NSWindowController {
-	NSString *diff;
+    NSString *diff;
 }
 
 + (void) showDiffWindowWithFiles:(NSArray *)filePaths fromCommit:(PBGitCommit *)startCommit diffCommit:(PBGitCommit *)diffCommit;

@@ -10,17 +10,17 @@
 #import "PBGitRepository.h"
 
 @interface PBGitTree : NSObject {
-	long long _fileSize;
+    long long _fileSize;
 
-	NSString* sha;
-	NSString* path;
-	PBGitRepository* repository;
-	__weak PBGitTree* parent;
-	NSArray* children;
-	BOOL leaf;
+    NSString* sha;
+    NSString* path;
+    PBGitRepository* repository;
+    __weak PBGitTree* parent;
+    NSArray* children;
+    BOOL leaf;
 
-	NSString* localFileName;
-	NSDate* localMtime;
+    NSString* localFileName;
+    NSDate* localMtime;
 }
 
 + (PBGitTree*) rootForCommit: (id) commit;

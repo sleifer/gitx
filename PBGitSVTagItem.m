@@ -14,20 +14,20 @@
 
 + (id)tagItemWithRevSpec:(PBGitRevSpecifier *)revSpecifier
 {
-	PBGitSVTagItem *item = [self itemWithTitle:[[revSpecifier description] lastPathComponent]];
-	item.revSpecifier = revSpecifier;
-	
-	return item;
+    PBGitSVTagItem *item = [self itemWithTitle:[[revSpecifier description] lastPathComponent]];
+    item.revSpecifier = revSpecifier;
+
+    return item;
 }
 
 
 - (NSImage *) icon
 {
-	static NSImage *tagImage = nil;
-	if (!tagImage)
-		tagImage = [NSImage imageNamed:@"Tag.png"];
-	
-	return tagImage;
+    static NSImage *tagImage = nil;
+    if (!tagImage)
+        tagImage = [NSImage imageNamed:@"Tag.png"];
+
+    return tagImage;
 }
 
 @end

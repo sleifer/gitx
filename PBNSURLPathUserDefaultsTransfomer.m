@@ -17,30 +17,30 @@
 @implementation PBNSURLPathUserDefaultsTransfomer
 
 + (Class)transformedValueClass {
-	return [NSURL class];
+    return [NSURL class];
 }
 
 + (BOOL)allowsReverseTransformation {
-	return YES;
+    return YES;
 }
 
 - (id)transformedValue:(id)value {
-	if(value == nil)
-	{
-		return nil;
-	}
+    if(value == nil)
+    {
+        return nil;
+    }
 
-	return [NSURL URLWithString:value
-				  relativeToURL:[NSURL URLWithString:@"file://localhost/"]];
+    return [NSURL URLWithString:value
+                  relativeToURL:[NSURL URLWithString:@"file://localhost/"]];
 }
 
 - (id)reverseTransformedValue:(id)value {
-	if(value == nil)
-	{
-		return nil;
-	}
+    if(value == nil)
+    {
+        return nil;
+    }
 
-	return [value path];
+    return [value path];
 }
 
 @end

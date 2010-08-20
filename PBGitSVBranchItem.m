@@ -14,20 +14,20 @@
 
 + (id)branchItemWithRevSpec:(PBGitRevSpecifier *)revSpecifier
 {
-	PBGitSVBranchItem *item = [self itemWithTitle:[[revSpecifier description] lastPathComponent]];
-	item.revSpecifier = revSpecifier;
-	
-	return item;
+    PBGitSVBranchItem *item = [self itemWithTitle:[[revSpecifier description] lastPathComponent]];
+    item.revSpecifier = revSpecifier;
+
+    return item;
 }
 
 
 - (NSImage *) icon
 {
-	static NSImage *branchImage = nil;
-	if (!branchImage)
-		branchImage = [NSImage imageNamed:@"Branch.png"];
-	
-	return branchImage;
+    static NSImage *branchImage = nil;
+    if (!branchImage)
+        branchImage = [NSImage imageNamed:@"Branch.png"];
+
+    return branchImage;
 }
 
 @end

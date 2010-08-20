@@ -15,47 +15,47 @@
 
 - (id) initWithPath:(NSString *)p
 {
-	if (![super init])
-		return nil;
+    if (![super init])
+        return nil;
 
-	path = p;
-	return self;
+    path = p;
+    return self;
 }
 
 - (NSString *)indexInfo
 {
-	NSAssert(status == NEW || self.commitBlobSHA, @"File is not new, but doesn't have an index entry!");
-	if (!self.commitBlobSHA)
-		return [NSString stringWithFormat:@"0 0000000000000000000000000000000000000000\t%@\0", self.path];
-	else
-		return [NSString stringWithFormat:@"%@ %@\t%@\0", self.commitBlobMode, self.commitBlobSHA, self.path];
+    NSAssert(status == NEW || self.commitBlobSHA, @"File is not new, but doesn't have an index entry!");
+    if (!self.commitBlobSHA)
+        return [NSString stringWithFormat:@"0 0000000000000000000000000000000000000000\t%@\0", self.path];
+    else
+        return [NSString stringWithFormat:@"%@ %@\t%@\0", self.commitBlobMode, self.commitBlobSHA, self.path];
 }
 
 - (NSImage *) icon
 {
-	NSString *filename;
-	switch (status) {
-		case NEW:
-			filename = @"new_file";
-			break;
-		case DELETED:
-			filename = @"deleted_file";
-			break;
-		default:
-			filename = @"empty_file";
-			break;
-	}
-	NSString *p = [[NSBundle mainBundle] pathForResource:filename ofType:@"png"];
-	return [[NSImage alloc] initByReferencingFile: p];
+    NSString *filename;
+    switch (status) {
+        case NEW:
+            filename = @"new_file";
+            break;
+        case DELETED:
+            filename = @"deleted_file";
+            break;
+        default:
+            filename = @"empty_file";
+            break;
+    }
+    NSString *p = [[NSBundle mainBundle] pathForResource:filename ofType:@"png"];
+    return [[NSImage alloc] initByReferencingFile: p];
 }
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
 {
-	return NO;
+    return NO;
 }
 
 + (BOOL)isKeyExcludedFromWebScript:(const char *)name {
-	return NO;
+    return NO;
 }
 
 @end

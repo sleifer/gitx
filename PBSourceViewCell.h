@@ -11,7 +11,7 @@
 
 
 @interface PBSourceViewCell : PBIconAndTextCell {
-	BOOL isCheckedOut;
+    BOOL isCheckedOut;
 }
 
 @property (assign) BOOL isCheckedOut;

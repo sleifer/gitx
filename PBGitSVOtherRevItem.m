@@ -15,20 +15,20 @@
 
 + (id)otherItemWithRevSpec:(PBGitRevSpecifier *)revSpecifier
 {
-	PBGitSVOtherRevItem *item = [self itemWithTitle:[revSpecifier title]];
-	item.revSpecifier = revSpecifier;
-	
-	return item;
+    PBGitSVOtherRevItem *item = [self itemWithTitle:[revSpecifier title]];
+    item.revSpecifier = revSpecifier;
+
+    return item;
 }
 
 
 - (NSImage *) icon
 {
-	static NSImage *otherRevImage = nil;
-	if (!otherRevImage)
-		otherRevImage = [NSImage imageNamed:@"Branch.png"];
-	
-	return otherRevImage;
+    static NSImage *otherRevImage = nil;
+    if (!otherRevImage)
+        otherRevImage = [NSImage imageNamed:@"Branch.png"];
+
+    return otherRevImage;
 }
 
 @end

@@ -10,16 +10,16 @@
 
 
 @interface PBCloneRepositoryPanel : NSWindowController {
-	NSTextField *repositoryURL;
-	NSTextField *destinationPath;
-	NSTextField *errorMessage;
-	NSView      *repositoryAccessoryView;
+    NSTextField *repositoryURL;
+    NSTextField *destinationPath;
+    NSTextField *errorMessage;
+    NSView      *repositoryAccessoryView;
 
-	NSOpenPanel *browseRepositoryPanel;
-	NSOpenPanel *browseDestinationPanel;
+    NSOpenPanel *browseRepositoryPanel;
+    NSOpenPanel *browseDestinationPanel;
 
-	NSString *path;
-	BOOL isBare;
+    NSString *path;
+    BOOL isBare;
 }
 
 + (id) panel;

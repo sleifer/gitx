@@ -11,7 +11,7 @@
 #import "PBGitCommit.h"
 
 @interface PBRefMenuItem : NSMenuItem {
-	id <PBGitRefish> refish;
+    id <PBGitRefish> refish;
 }
 
 @property (retain) id <PBGitRefish> refish;

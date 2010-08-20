@@ -10,7 +10,7 @@
 #import "PBSourceViewItem.h"
 
 @interface PBSourceViewAction : PBSourceViewItem {
-	NSImage *icon;
+    NSImage *icon;
 }
 
 @property(retain) NSImage *icon;

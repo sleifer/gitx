@@ -21,174 +21,174 @@
 
 - (id)initWithRepository:(PBGitRepository*)theRepository displayDefault:(BOOL)displayDefault
 {
-	if (!(self = [self initWithWindowNibName:@"RepositoryWindow"]))
-		return nil;
+    if (!(self = [self initWithWindowNibName:@"RepositoryWindow"]))
+        return nil;
 
-	self.repository = theRepository;
+    self.repository = theRepository;
 
-	return self;
+    return self;
 }
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-	NSLog(@"Window will close!");
+    NSLog(@"Window will close!");
 
-	if (sidebarController)
-		[sidebarController closeView];
+    if (sidebarController)
+        [sidebarController closeView];
 
-	if (contentController)
-		[contentController removeObserver:self forKeyPath:@"status"];
+    if (contentController)
+        [contentController removeObserver:self forKeyPath:@"status"];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	if ([menuItem action] == @selector(showCommitView:) || [menuItem action] == @selector(showHistoryView:)) {
-		return ![repository isBareRepository];
-	}
-	return YES;
+    if ([menuItem action] == @selector(showCommitView:) || [menuItem action] == @selector(showHistoryView:)) {
+        return ![repository isBareRepository];
+    }
+    return YES;
 }
 
 - (void) awakeFromNib
 {
-	[[self window] setDelegate:self];
-	[[self window] setAutorecalculatesContentBorderThickness:NO forEdge:NSMinYEdge];
-	[[self window] setContentBorderThickness:31.0f forEdge:NSMinYEdge];
+    [[self window] setDelegate:self];
+    [[self window] setAutorecalculatesContentBorderThickness:NO forEdge:NSMinYEdge];
+    [[self window] setContentBorderThickness:31.0f forEdge:NSMinYEdge];
 
-	sidebarController = [[PBGitSidebarController alloc] initWithRepository:repository superController:self];
-	[[sidebarController view] setFrame:[sourceSplitView bounds]];
-	[sourceSplitView addSubview:[sidebarController view]];
-	[sourceListControlsView addSubview:sidebarController.sourceListControlsView];
+    sidebarController = [[PBGitSidebarController alloc] initWithRepository:repository superController:self];
+    [[sidebarController view] setFrame:[sourceSplitView bounds]];
+    [sourceSplitView addSubview:[sidebarController view]];
+    [sourceListControlsView addSubview:sidebarController.sourceListControlsView];
 
-	[[statusField cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	[progressIndicator setUsesThreadedAnimation:YES];
+    [[statusField cell] setBackgroundStyle:NSBackgroundStyleRaised];
+    [progressIndicator setUsesThreadedAnimation:YES];
 
-	NSImage *finderImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kFinderIcon)];
-	[finderItem setImage:finderImage];
+    NSImage *finderImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kFinderIcon)];
+    [finderItem setImage:finderImage];
 
-	NSImage *terminalImage = [[NSWorkspace sharedWorkspace] iconForFile:@"/Applications/Utilities/Terminal.app/"];
-	[terminalItem setImage:terminalImage];
+    NSImage *terminalImage = [[NSWorkspace sharedWorkspace] iconForFile:@"/Applications/Utilities/Terminal.app/"];
+    [terminalItem setImage:terminalImage];
 
-	[self showWindow:nil];
+    [self showWindow:nil];
 }
 
 - (void) removeAllContentSubViews
 {
-	if ([contentSplitView subviews])
-		while ([[contentSplitView subviews] count] > 0)
-			[[[contentSplitView subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
+    if ([contentSplitView subviews])
+        while ([[contentSplitView subviews] count] > 0)
+            [[[contentSplitView subviews] lastObject] removeFromSuperviewWithoutNeedingDisplay];
 }
 
 - (void) changeContentController:(PBViewController *)controller
 {
-	if (!controller || (contentController == controller))
-		return;
+    if (!controller || (contentController == controller))
+        return;
 
-	if (contentController)
-		[contentController removeObserver:self forKeyPath:@"status"];
+    if (contentController)
+        [contentController removeObserver:self forKeyPath:@"status"];
 
-	[self removeAllContentSubViews];
+    [self removeAllContentSubViews];
 
-	contentController = controller;
-	
-	[[contentController view] setFrame:[contentSplitView bounds]];
-	[contentSplitView addSubview:[contentController view]];
+    contentController = controller;
 
-	[self setNextResponder: contentController];
-	[[self window] makeFirstResponder:[contentController firstResponder]];
-	[contentController updateView];
-	[contentController addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial context:@"statusChange"];
+    [[contentController view] setFrame:[contentSplitView bounds]];
+    [contentSplitView addSubview:[contentController view]];
+
+    [self setNextResponder: contentController];
+    [[self window] makeFirstResponder:[contentController firstResponder]];
+    [contentController updateView];
+    [contentController addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial context:@"statusChange"];
 }
 
 - (void) showCommitView:(id)sender
 {
-	[sidebarController selectStage];
+    [sidebarController selectStage];
 }
 
 - (void) showHistoryView:(id)sender
 {
-	[sidebarController selectCurrentBranch];
+    [sidebarController selectCurrentBranch];
 }
 
 - (void)showMessageSheet:(NSString *)messageText infoText:(NSString *)infoText
 {
-	[PBGitXMessageSheet beginMessageSheetForWindow:[self window] withMessageText:messageText infoText:infoText];
+    [PBGitXMessageSheet beginMessageSheetForWindow:[self window] withMessageText:messageText infoText:infoText];
 }
 
 - (void)showErrorSheet:(NSError *)error
 {
-	if ([[error domain] isEqualToString:PBGitRepositoryErrorDomain])
-		[PBGitXMessageSheet beginMessageSheetForWindow:[self window] withError:error];
-	else
-		[[NSAlert alertWithError:error] beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+    if ([[error domain] isEqualToString:PBGitRepositoryErrorDomain])
+        [PBGitXMessageSheet beginMessageSheetForWindow:[self window] withError:error];
+    else
+        [[NSAlert alertWithError:error] beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
 - (void)showErrorSheetTitle:(NSString *)title message:(NSString *)message arguments:(NSArray *)arguments output:(NSString *)output
 {
-	NSString *command = [arguments componentsJoinedByString:@" "];
-	NSString *reason = [NSString stringWithFormat:@"%@\n\ncommand: git %@\n%@", message, command, output];
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-							  title, NSLocalizedDescriptionKey,
-							  reason, NSLocalizedRecoverySuggestionErrorKey,
-							  nil];
-	NSError *error = [NSError errorWithDomain:PBGitRepositoryErrorDomain code:0 userInfo:userInfo];
-	[self showErrorSheet:error];
+    NSString *command = [arguments componentsJoinedByString:@" "];
+    NSString *reason = [NSString stringWithFormat:@"%@\n\ncommand: git %@\n%@", message, command, output];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              title, NSLocalizedDescriptionKey,
+                              reason, NSLocalizedRecoverySuggestionErrorKey,
+                              nil];
+    NSError *error = [NSError errorWithDomain:PBGitRepositoryErrorDomain code:0 userInfo:userInfo];
+    [self showErrorSheet:error];
 }
 
 - (IBAction) revealInFinder:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openFile:[repository workingDirectory]];
+    [[NSWorkspace sharedWorkspace] openFile:[repository workingDirectory]];
 }
 
 - (IBAction) openInTerminal:(id)sender
 {
-	TerminalApplication *term = [SBApplication applicationWithBundleIdentifier: @"com.apple.Terminal"];
-	NSString *workingDirectory = [[repository workingDirectory] stringByAppendingString:@"/"];
-	NSString *cmd = [NSString stringWithFormat: @"cd \"%@\"; clear; echo '# Opened by GitX:'; git status", workingDirectory];
-	[term doScript: cmd in: nil];
-	[NSThread sleepForTimeInterval: 0.1];
-	[term activate];
+    TerminalApplication *term = [SBApplication applicationWithBundleIdentifier: @"com.apple.Terminal"];
+    NSString *workingDirectory = [[repository workingDirectory] stringByAppendingString:@"/"];
+    NSString *cmd = [NSString stringWithFormat: @"cd \"%@\"; clear; echo '# Opened by GitX:'; git status", workingDirectory];
+    [term doScript: cmd in: nil];
+    [NSThread sleepForTimeInterval: 0.1];
+    [term activate];
 }
 
 - (IBAction) cloneTo:(id)sender
 {
-	[PBCloneRepsitoryToSheet beginCloneRepsitoryToSheetForRepository:repository];
+    [PBCloneRepsitoryToSheet beginCloneRepsitoryToSheetForRepository:repository];
 }
 
 - (IBAction) refresh:(id)sender
 {
-	[contentController refresh:self];
+    [contentController refresh:self];
 }
 
 - (void) updateStatus
 {
-	NSString *status = contentController.status;
-	BOOL isBusy = contentController.isBusy;
+    NSString *status = contentController.status;
+    BOOL isBusy = contentController.isBusy;
 
-	if (!status) {
-		status = @"";
-		isBusy = NO;
-	}
+    if (!status) {
+        status = @"";
+        isBusy = NO;
+    }
 
-	[statusField setStringValue:status];
+    [statusField setStringValue:status];
 
-	if (isBusy) {
-		[progressIndicator startAnimation:self];
-		[progressIndicator setHidden:NO];
-	}
-	else {
-		[progressIndicator stopAnimation:self];
-		[progressIndicator setHidden:YES];
-	}
+    if (isBusy) {
+        [progressIndicator startAnimation:self];
+        [progressIndicator setHidden:NO];
+    }
+    else {
+        [progressIndicator stopAnimation:self];
+        [progressIndicator setHidden:YES];
+    }
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([(NSString *)context isEqualToString:@"statusChange"]) {
-		[self updateStatus];
-		return;
-	}
+        [self updateStatus];
+        return;
+    }
 
-	[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 
@@ -203,40 +203,40 @@
 
 - (CGFloat)splitView:(NSSplitView *)view constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
 {
-	if (proposedMin < kGitSplitViewMinWidth)
-		return kGitSplitViewMinWidth;
+    if (proposedMin < kGitSplitViewMinWidth)
+        return kGitSplitViewMinWidth;
 
-	return proposedMin;
+    return proposedMin;
 }
 
 - (CGFloat)splitView:(NSSplitView *)view constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
 {
-	if (dividerIndex == 0)
-		return kGitSplitViewMaxWidth;
+    if (dividerIndex == 0)
+        return kGitSplitViewMaxWidth;
 
-	return proposedMax;
+    return proposedMax;
 }
 
 #pragma mark constrain sidebar width while resizing the window
 
 - (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
-	NSRect newFrame = [sender frame];
+    NSRect newFrame = [sender frame];
 
-	float dividerThickness = [sender dividerThickness];
+    float dividerThickness = [sender dividerThickness];
 
-	NSView *sourceView = [[sender subviews] objectAtIndex:0];
-	NSRect sourceFrame = [sourceView frame];
-	sourceFrame.size.height = newFrame.size.height;
+    NSView *sourceView = [[sender subviews] objectAtIndex:0];
+    NSRect sourceFrame = [sourceView frame];
+    sourceFrame.size.height = newFrame.size.height;
 
-	NSView *mainView = [[sender subviews] objectAtIndex:1];
-	NSRect mainFrame = [mainView frame];
-	mainFrame.origin.x = sourceFrame.size.width + dividerThickness;
-	mainFrame.size.width = newFrame.size.width - mainFrame.origin.x;
-	mainFrame.size.height = newFrame.size.height;
+    NSView *mainView = [[sender subviews] objectAtIndex:1];
+    NSRect mainFrame = [mainView frame];
+    mainFrame.origin.x = sourceFrame.size.width + dividerThickness;
+    mainFrame.size.width = newFrame.size.width - mainFrame.origin.x;
+    mainFrame.size.height = newFrame.size.height;
 
-	[sourceView setFrame:sourceFrame];
-	[mainView setFrame:mainFrame];
+    [sourceView setFrame:sourceFrame];
+    [mainView setFrame:mainFrame];
 }
 
 @end

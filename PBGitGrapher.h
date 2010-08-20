@@ -12,9 +12,9 @@
 #import "PBGraphCellInfo.h"
 
 @interface PBGitGrapher : NSObject {
-	PBGraphCellInfo *previous;
-	void *pl;
-	int curLane;
+    PBGraphCellInfo *previous;
+    void *pl;
+    int curLane;
 }
 
 - (id) initWithRepository:(PBGitRepository *)repo;

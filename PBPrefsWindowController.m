@@ -17,28 +17,28 @@
 
 - (void)setupToolbar
 {
-	// GENERAL
-	[self addView:generalPrefsView label:@"General" image:[NSImage imageNamed:@"gitx"]];
-	// INTERGRATION
-	[self addView:integrationPrefsView label:@"Integration" image:[NSImage imageNamed:NSImageNameNetwork]];
-	// UPDATES
-	[self addView:updatesPrefsView label:@"Updates"];
+    // GENERAL
+    [self addView:generalPrefsView label:@"General" image:[NSImage imageNamed:@"gitx"]];
+    // INTERGRATION
+    [self addView:integrationPrefsView label:@"Integration" image:[NSImage imageNamed:NSImageNameNetwork]];
+    // UPDATES
+    [self addView:updatesPrefsView label:@"Updates"];
 }
 
 - (void)displayViewForIdentifier:(NSString *)identifier animate:(BOOL)animate
 {
-	[super displayViewForIdentifier:identifier animate:animate];
+    [super displayViewForIdentifier:identifier animate:animate];
 
-	[[NSUserDefaults standardUserDefaults] setObject:identifier forKey:kPreferenceViewIdentifier];
+    [[NSUserDefaults standardUserDefaults] setObject:identifier forKey:kPreferenceViewIdentifier];
 }
 
 - (NSString *)defaultViewIdentifier
 {
-	NSString *identifier = [[NSUserDefaults standardUserDefaults] objectForKey:kPreferenceViewIdentifier];
-	if (identifier)
-		return identifier;
+    NSString *identifier = [[NSUserDefaults standardUserDefaults] objectForKey:kPreferenceViewIdentifier];
+    if (identifier)
+        return identifier;
 
-	return [super defaultViewIdentifier];
+    return [super defaultViewIdentifier];
 }
 
 #pragma mark -
@@ -46,26 +46,26 @@
 
 - (IBAction) checkGitValidity: sender
 {
-	// FIXME: This does not work reliably, probably due to: http://www.cocoabuilder.com/archive/message/cocoa/2008/9/10/217850
-	//[badGitPathIcon setHidden:[PBGitRepository validateGit:[[NSValueTransformer valueTransformerForName:@"PBNSURLPathUserDefaultsTransfomer"] reverseTransformedValue:[gitPathController URL]]]];
+    // FIXME: This does not work reliably, probably due to: http://www.cocoabuilder.com/archive/message/cocoa/2008/9/10/217850
+    //[badGitPathIcon setHidden:[PBGitRepository validateGit:[[NSValueTransformer valueTransformerForName:@"PBNSURLPathUserDefaultsTransfomer"] reverseTransformedValue:[gitPathController URL]]]];
 }
 
 - (IBAction) resetGitPath: sender
 {
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"gitExecutable"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"gitExecutable"];
 }
 
 - (void)pathCell:(NSPathCell *)pathCell willDisplayOpenPanel:(NSOpenPanel *)openPanel
 {
-	[openPanel setCanChooseDirectories:NO];
-	[openPanel setCanChooseFiles:YES];
-	[openPanel setAllowsMultipleSelection:NO];
-	[openPanel setTreatsFilePackagesAsDirectories:YES];
-	[openPanel setAccessoryView:gitPathOpenAccessory];
-	[openPanel setResolvesAliases:NO];
-	//[[openPanel _navView] setShowsHiddenFiles:YES];
+    [openPanel setCanChooseDirectories:NO];
+    [openPanel setCanChooseFiles:YES];
+    [openPanel setAllowsMultipleSelection:NO];
+    [openPanel setTreatsFilePackagesAsDirectories:YES];
+    [openPanel setAccessoryView:gitPathOpenAccessory];
+    [openPanel setResolvesAliases:NO];
+    //[[openPanel _navView] setShowsHiddenFiles:YES];
 
-	gitPathOpenPanel = openPanel;
+    gitPathOpenPanel = openPanel;
 }
 
 #pragma mark -
@@ -73,9 +73,9 @@
 
 - (IBAction) showHideAllFiles: sender
 {
-	/* FIXME: This uses undocumented OpenPanel features to show hidden files! */
-	NSNumber *showHidden = [NSNumber numberWithBool:[sender state] == NSOnState];
-	[[gitPathOpenPanel valueForKey:@"_navView"] setValue:showHidden forKey:@"showsHiddenFiles"];
+    /* FIXME: This uses undocumented OpenPanel features to show hidden files! */
+    NSNumber *showHidden = [NSNumber numberWithBool:[sender state] == NSOnState];
+    [[gitPathOpenPanel valueForKey:@"_navView"] setValue:showHidden forKey:@"showsHiddenFiles"];
 }
 
 @end
