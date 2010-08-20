@@ -108,7 +108,8 @@ using namespace std;
 	if (showSign)
 		formatString = [formatString stringByAppendingString:@"\01%m"];
 	
-	NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"log", @"-z", @"--topo-order", @"--children", formatString, nil];
+	// TODO re-add "--topo-order" as config option, or sorting option
+	NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"log", @"-z", @"--date-order", @"--children", formatString, nil];
 
 	if (!rev)
 		[arguments addObject:@"HEAD"];
