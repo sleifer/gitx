@@ -56,6 +56,14 @@
     [controller copyCommitSHA];
 }
 
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem
+{
+	SEL action = [anItem action];
+	if (action == @selector(copy:) || action == @selector(copySHA:))
+		return [controller.commitController selectionIndex] != NSNotFound;
+	return [super respondsToSelector:@selector(validateUserInterfaceItem:)] ? [super validateUserInterfaceItem:anItem] : YES;
+}
+
 // !!! Andre Berg 20100330: Used from -scrollSelectionToTopOfViewFrom: of PBGitHistoryController
 // so that when the history controller udpates the branch filter the origin of the superview gets
 // shifted into multiples of the row height. Otherwise the top selected row will always be off by

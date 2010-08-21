@@ -293,7 +293,7 @@
 
 - (void) copyCommitInfo
 {
-    PBGitCommit *commit = [[commitController selectedObjects] objectAtIndex:0];
+    PBGitCommit *commit = [[commitController selectedObjects] lastObject];
     if (!commit)
         return;
     NSString *info = [NSString stringWithFormat:@"%@ (%@)", [[commit realSha] substringToIndex:10], [commit subject]];
@@ -306,7 +306,7 @@
 
 - (void) copyCommitSHA
 {
-    PBGitCommit *commit = [[commitController selectedObjects] objectAtIndex:0];
+    PBGitCommit *commit = [[commitController selectedObjects] lastObject];
     if (!commit)
         return;
     NSString *info = [[commit realSha] substringWithRange:NSMakeRange(0, 7)];
