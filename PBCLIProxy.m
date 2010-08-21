@@ -38,7 +38,11 @@
     NSURL* url = [NSURL fileURLWithPath:[repositoryPath path]];
     NSArray* arguments = [NSArray arrayWithArray:args];
 
-    PBGitRepository *document = [[PBRepositoryDocumentController sharedDocumentController] documentForLocation:url];
+    PBGitRepository *document = nil;
+	@try {
+		document = [[PBRepositoryDocumentController sharedDocumentController] documentForLocation:url];
+	}
+	@catch (NSException *e) {}
     if (!document) {
         if (error) {
             NSString *suggestion = [PBGitBinary path] ? @"this isn't a git repository" : @"GitX can't find your git binary";
