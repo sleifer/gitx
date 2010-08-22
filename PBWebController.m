@@ -38,6 +38,10 @@
     [view setUIDelegate:self];
     [view setFrameLoadDelegate:self];
     [view setResourceLoadDelegate:self];
+	
+	WebPreferences *prefs = [view preferences];
+	[prefs setShouldPrintBackgrounds:YES];
+	
     [[view mainFrame] loadRequest:request];
 }
 
