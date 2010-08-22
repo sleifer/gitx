@@ -292,15 +292,47 @@
 
     int index = [cell indexAtX:(location.x - cellFrame.origin.x)];
 
-    if (index == -1)
-        return NO;
+    if (index != -1) {
+		// The drag started with one of the ref cells
+		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:index], NULL]];
+		[pboard declareTypes:[NSArray arrayWithObject:@"PBGitRef"] owner:self];
+		[pboard setData:data forType:@"PBGitRef"];
+		return YES;
+	}
 
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:row], [NSNumber numberWithInt:index], NULL]];
-    [pboard declareTypes:[NSArray arrayWithObject:@"PBGitRef"] owner:self];
-    [pboard setData:data forType:@"PBGitRef"];
-
-    return YES;
+	// The drag started outside of a ref cell, prepare a file promise drag
+	[pboard declareTypes:[NSArray arrayWithObject:NSFilesPromisePboardType] owner:self];
+	[pboard setPropertyList:[NSArray arrayWithObject:(NSString *)kUTTypePlainText] forType:NSFilesPromisePboardType];
+	
+	return YES;
 }
+
+
+- (NSArray *)tableView:(NSTableView *)aTableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet
+{
+	PBGitCommit *commit = [[commitController arrangedObjects] objectAtIndex:[indexSet firstIndex]];
+
+	int retValue = 1;
+    NSArray *args = [NSArray arrayWithObjects:@"format-patch", @"-1", @"-o", [dropDestination path], [[commit sha] string], nil];
+    NSString *info = [historyController.repository outputInWorkdirForArguments:args retValue:&retValue];
+    if (retValue) {
+        NSString *message = [NSString stringWithFormat:@"Unable to export patch"];
+        [historyController.repository.windowController showMessageSheet:message infoText:@""];
+		return nil;
+    }
+
+	NSMutableArray *filenames = [NSMutableArray array];
+	NSArray *lines = [info componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+	for (NSString *line in lines) {
+		NSString *filename = [line lastPathComponent];
+		if (![filename length])
+			continue;
+		[filenames addObject:filename];
+	}
+	return filenames;
+}
+
+
 
 - (NSDragOperation)tableView:(NSTableView*)tv
                 validateDrop:(id <NSDraggingInfo>)info
