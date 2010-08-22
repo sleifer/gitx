@@ -33,7 +33,7 @@
         diffCommit = [startCommit.repository headCommit];
 
     NSString *commitSelector = [NSString stringWithFormat:@"%@..%@", [startCommit realSha], [diffCommit realSha]];
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"diff", commitSelector, nil];
+    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"diff", @"--no-ext-diff", commitSelector, nil];
     if (filePaths) {
         [arguments addObject:@"--"];
         [arguments addObjectsFromArray:filePaths];

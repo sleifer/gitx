@@ -100,7 +100,7 @@ void handleSTDINDiff(id<GitXCliToolProtocol> proxy)
 void handleDiffWithArguments(NSArray *arguments, NSString *directory, id<GitXCliToolProtocol> proxy)
 {
     int ret;
-    arguments = [[NSArray arrayWithObject:@"diff"] arrayByAddingObjectsFromArray:arguments];
+    arguments = [[NSArray arrayWithObjects:@"diff", @"--no-ext-diff", nil] arrayByAddingObjectsFromArray:arguments];
     NSString *diff = [PBEasyPipe outputForCommand:[PBGitBinary path] withArgs:arguments inDir:directory retValue:&ret];
     if (ret) {
         printf("Invalid diff command\n");
