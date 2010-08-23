@@ -14,6 +14,7 @@
 
 @class PBGitSidebarController;
 @class PBWebHistoryController;
+@class PBWebBlameController;
 @class PBGitGradientBarView;
 @class PBRefController;
 @class QLPreviewPanel;
@@ -30,6 +31,7 @@
     IBOutlet PBCommitList* commitList;
     IBOutlet PBCollapsibleSplitView *historySplitView;
     IBOutlet PBWebHistoryController *webHistoryController;
+    IBOutlet PBWebBlameController *webBlameController;
     QLPreviewPanel* previewPanel;
 
     IBOutlet PBGitGradientBarView *upperToolbarView;
@@ -41,8 +43,11 @@
     IBOutlet NSButton *allBranchesFilterItem;
     IBOutlet NSButton *localRemoteBranchesFilterItem;
     IBOutlet NSButton *selectedBranchFilterItem;
-
+	
+	IBOutlet NSTabView *detailTreeTabView;
+	IBOutlet NSTabView *contentBlameTabView;
     IBOutlet id webView;
+    IBOutlet id blameWebView;
     int selectedCommitDetailsIndex;
     BOOL forceSelectionUpdate;
 
@@ -59,6 +64,7 @@
 
 - (IBAction) setDetailedView:(id)sender;
 - (IBAction) setTreeView:(id)sender;
+- (IBAction) setBlameView:(id)sender;
 - (IBAction) setBranchFilter:(id)sender;
 
 - (void)selectCommit:(PBGitSHA *)commit;
@@ -66,11 +72,13 @@
 - (IBAction) toggleQLPreviewPanel:(id)sender;
 - (IBAction) openSelectedFile:(id)sender;
 - (void) updateQuicklookForce: (BOOL) force;
+- (void) updateBlame;
 
 // Context menu methods
 - (NSMenu *)contextMenuForTreeView;
 - (NSArray *)menuItemsForPaths:(NSArray *)paths addSeparator:(BOOL)addSeparator;
 - (void)showCommitsFromTree:(id)sender;
+- (void)showBlameFromTree:(id)sender;
 - (void)showInFinderAction:(id)sender;
 - (void)openFilesAction:(id)sender;
 

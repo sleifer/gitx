@@ -39,5 +39,6 @@
 @property(readonly) NSArray* children;
 @property(readonly) NSString* fullPath;
 @property(readonly) NSString* contents;
+@property(readonly) NSString* blame;
 
 @end

@@ -115,6 +115,14 @@
     return [repository outputForArguments:[NSArray arrayWithObjects:@"show", [self refSpec], nil]];
 }
 
+- (NSString*) blame
+{
+    if (!leaf)
+        return [NSString stringWithFormat:@"This is a tree with path %@", [self fullPath]];
+
+    return [repository outputInWorkdirForArguments:[NSArray arrayWithObjects:@"blame", [self sha], @"--" , [self fullPath], nil]];
+}
+
 - (long long)fileSize
 {
     if (_fileSize)

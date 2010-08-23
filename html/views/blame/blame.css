@@ -1,0 +1,168 @@
+body {
+    font-family: 'Lucida Grande';
+}
+
+#commit_header {
+    width: auto;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#authorTable {
+    margin: -4px;
+}
+
+#rightcontent {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+#buttons {
+}
+
+#blame {
+	white-space: pre-wrap;
+    font-family: Menlo, Monaco;
+}
+
+#message_files {
+    margin: 5px;
+    padding-left: 1em;
+    width: auto;
+}
+
+#message {
+    font-family: Menlo, Monaco;
+    white-space: pre-wrap;
+    padding-top: 10px;
+}
+
+#files {
+    margin-top: 1em;
+    margin-left: 0.5em;
+}
+
+#files a {
+    color: #666666;
+    text-decoration: none;
+}
+
+#files a:hover {
+    color: #4444ff;
+    border-bottom: 1px solid #4444ff;
+}
+
+#files img {
+    float: left;
+    margin-right: 0.5em;
+    margin-top: 1px;
+}
+
+#files p {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+.clear_both {
+    clear:both;
+    display:block;
+    height:1px;
+    line-height:0;
+    margin:1em;
+    visibility:hidden;
+}
+
+#details {
+    font-family: Monaco;
+    font-size: 10px;
+    overflow: hidden;
+    width: 600px;
+}
+hr {
+    border: 0;
+    height: 1px;
+    margin: 0 8px;
+    background-color: #DEDEDE;
+    clear: both;
+}
+
+a {
+    color: rgb(20, 79, 174);
+}
+
+a.showdiff {
+    text-decoration: none;
+    font-size: 1.3em;
+}
+
+.refs {
+    font-size: 9px;
+    font-family: Helvetica;
+    border: 1px solid black;
+    margin-right: 5px;
+    padding: 1px 3px 1px 3px;
+    -webkit-border-radius: 2px;
+}
+
+.refs.head {
+    background-color: #aaf254;
+}
+
+.refs.remote {
+    background-color: #b2dfff;
+}
+
+.refs.tag {
+    background-color: #fced4f;
+}
+
+.refs.currentBranch {
+    background-color: #fca64f;
+}
+
+/*
+div.button
+{
+    color: #666666;
+
+    font-size: 60%;
+    text-align: center;
+
+    width: 70px;
+
+    margin-right: 10px;
+
+    padding: 2px;
+
+    float: left;
+    clear: both;
+
+    border: 1px solid;
+    -webkit-border-radius: 3px;
+}
+
+div.created
+{
+    background-color: #ccffcc;
+    border-color: #66ff66;
+}
+
+div.changed
+{
+    background-color: #ffcc99;
+    border-color: #ff9933;
+}
+
+div.deleted
+{
+    background-color: #ffcccc;
+    border-color: #ff6666;
+}
+
+div.renamed
+{
+    // No colour needed right now.
+}
+*/

@@ -8,6 +8,7 @@
 
 #import "PBGitHistoryController.h"
 #import "PBWebHistoryController.h"
+#import "PBWebBlameController.h"
 #import "CWQuickLook.h"
 #import "PBGitGrapher.h"
 #import "PBGitRevisionCell.h"
@@ -26,6 +27,7 @@
 #define kHistorySelectedDetailIndexKey @"PBHistorySelectedDetailIndex"
 #define kHistoryDetailViewIndex 0
 #define kHistoryTreeViewIndex 1
+#define kHistoryBlameViewIndex 2
 
 @interface PBGitHistoryController ()
 
@@ -105,6 +107,9 @@
     if (self.selectedCommitDetailsIndex == kHistoryTreeViewIndex) {
         self.gitTree = selectedCommit.tree;
         [self restoreFileBrowserSelection];
+    } else if (self.selectedCommitDetailsIndex == kHistoryBlameViewIndex) {
+        self.gitTree = selectedCommit.tree;
+        [self restoreFileBrowserSelection];
     }
     else {
         // kHistoryDetailViewIndex
@@ -161,6 +166,23 @@
 
     selectedCommitDetailsIndex = detailsIndex;
     [[NSUserDefaults standardUserDefaults] setInteger:selectedCommitDetailsIndex forKey:kHistorySelectedDetailIndexKey];
+	
+	switch (detailsIndex) {
+		case kHistoryDetailViewIndex:
+			[detailTreeTabView selectTabViewItemAtIndex:0];
+			break;
+		case kHistoryTreeViewIndex:
+			[detailTreeTabView selectTabViewItemAtIndex:1];
+			[contentBlameTabView selectTabViewItemAtIndex:0];
+			break;
+		case kHistoryBlameViewIndex:
+			[detailTreeTabView selectTabViewItemAtIndex:1];
+			[contentBlameTabView selectTabViewItemAtIndex:1];
+			break;
+		default:
+			break;
+	}
+	
     forceSelectionUpdate = YES;
     [self updateKeys];
 }
@@ -173,7 +195,7 @@
 
 - (void) restoreFileBrowserSelection
 {
-    if (self.selectedCommitDetailsIndex != kHistoryTreeViewIndex)
+    if (self.selectedCommitDetailsIndex != kHistoryTreeViewIndex && self.selectedCommitDetailsIndex != kHistoryBlameViewIndex)
         return;
 
     NSArray *children = [treeController content];
@@ -228,7 +250,11 @@
 	}
 
     if ([(NSString *)context isEqualToString: @"treeChange"]) {
-        [self updateQuicklookForce: NO];
+		if (self.selectedCommitDetailsIndex == kHistoryTreeViewIndex) {
+			[self updateQuicklookForce: NO];
+		} else if (self.selectedCommitDetailsIndex == kHistoryBlameViewIndex) {
+			[self updateBlame];
+		}
         [self saveFileBrowserSelection];
         return;
     }
@@ -275,6 +301,8 @@
 		[menuItem setState:(self.selectedCommitDetailsIndex == kHistoryDetailViewIndex) ? NSOnState : NSOffState];
     } else if ([menuItem action] == @selector(setTreeView:)) {
 		[menuItem setState:(self.selectedCommitDetailsIndex == kHistoryTreeViewIndex) ? NSOnState : NSOffState];
+    } else if ([menuItem action] == @selector(setBlameView:)) {
+		[menuItem setState:(self.selectedCommitDetailsIndex == kHistoryBlameViewIndex) ? NSOnState : NSOffState];
     }
     return YES;
 }
@@ -288,6 +316,12 @@
 - (IBAction) setTreeView:(id)sender
 {
     self.selectedCommitDetailsIndex = kHistoryTreeViewIndex;
+    forceSelectionUpdate = YES;
+}
+
+- (IBAction) setBlameView:(id)sender
+{
+    self.selectedCommitDetailsIndex = kHistoryBlameViewIndex;
     forceSelectionUpdate = YES;
 }
 
@@ -351,6 +385,18 @@
             [self updateQuicklookForce:YES];
         }
     }
+}
+
+- (void) updateBlame
+{
+	NSArray *selection = [treeController selectedObjects];
+	if (selection && [selection count] == 1) {
+		PBGitTree *item = [selection objectAtIndex:0];
+		PBGitCommit *commit = [[commitController selectedObjects] lastObject];
+		[webBlameController changeContentTo:item atCommit:commit];
+	} else {
+		[webBlameController changeContentTo:nil atCommit:nil];
+	}
 }
 
 - (void) updateQuicklookForce:(BOOL)force
@@ -497,6 +543,14 @@
 
 #pragma mark Tree Context Menu Methods
 
+- (void)showBlameFromTree:(id)sender
+{
+    NSArray *filePath = [sender representedObject];
+	currentFileBrowserSelectionPath = filePath;
+	[self restoreFileBrowserSelection];
+	self.selectedCommitDetailsIndex = 2;
+}
+
 - (void)showCommitsFromTree:(id)sender
 {
     // TODO: Enable this from webview as well!
@@ -565,6 +619,10 @@
         [filePaths addObject:[filePath stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
 
     BOOL multiple = [filePaths count] != 1;
+    NSMenuItem *blameItem = [[NSMenuItem alloc] initWithTitle:@"Show blame for file"
+                                                         action:(multiple == YES) ? nil : @selector(showBlameFromTree:)
+                                                  keyEquivalent:@""];
+
     NSMenuItem *historyItem = [[NSMenuItem alloc] initWithTitle:multiple? @"Show history of files" : @"Show history of file"
                                                          action:@selector(showCommitsFromTree:)
                                                   keyEquivalent:@""];
@@ -589,9 +647,9 @@
 
     NSArray *menuItems;
 	if (addSeparator) {
-		menuItems = [NSArray arrayWithObjects:historyItem, diffItem, checkoutItem, [NSMenuItem separatorItem], finderItem, openFilesItem, [NSMenuItem separatorItem], nil];
+		menuItems = [NSArray arrayWithObjects:blameItem, historyItem, diffItem, checkoutItem, [NSMenuItem separatorItem], finderItem, openFilesItem, [NSMenuItem separatorItem], nil];
 	} else {
-		menuItems = [NSArray arrayWithObjects:historyItem, diffItem, checkoutItem, [NSMenuItem separatorItem], finderItem, openFilesItem, nil];
+		menuItems = [NSArray arrayWithObjects:blameItem, historyItem, diffItem, checkoutItem, [NSMenuItem separatorItem], finderItem, openFilesItem, nil];
 	}
     for (NSMenuItem *item in menuItems) {
         [item setTarget:self];
