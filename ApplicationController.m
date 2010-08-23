@@ -64,9 +64,33 @@
     }
 }
 
+- (void)tryFScript
+{
+    NSBundle* bundle = nil;
+	BOOL available = NO;
+    bundle = [NSBundle bundleWithPath:@"/Library/Frameworks/FScript.framework"];
+    if (bundle) {
+        available = [bundle load];
+    }
+	if (available) {
+		Class menuClass = NSClassFromString(@"FScriptMenuItem");
+		
+		if (menuClass) {
+			[[NSApp mainMenu] addItem:[[menuClass alloc] init]];
+		}
+	}
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification*)notification
 {
     [[SUUpdater sharedUpdater] setSendsSystemProfile:YES];
+	
+	[self tryFScript];
+	
+#if 0
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WebKitDeveloperExtras"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+#endif
 
     // Make sure Git's SSH password requests get forwarded to our little UI tool:
     setenv( "SSH_ASKPASS", [[[NSBundle mainBundle] pathForResource: @"gitx_askpasswd" ofType: @""] UTF8String], 1 );
