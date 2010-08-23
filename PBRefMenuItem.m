@@ -146,6 +146,7 @@
     NSString *headBranchName = [[[commit.repository headRef] ref] shortName];
     BOOL isOnHeadBranch = [commit isOnHeadBranch];
     BOOL isHead = [[commit sha] isEqual:[commit.repository headSHA]];
+	BOOL hasRadar = ([commit referencedRadarsLink] == nil) ? NO : YES;
 
     [items addObject:[PBRefMenuItem itemWithTitle:@"Checkout Commit" action:@selector(checkout:) enabled:YES]];
     [items addObject:[PBRefMenuItem separatorItem]];
@@ -171,6 +172,9 @@
     // rebase
     NSString *rebaseTitle = isOnHeadBranch ? @"Rebase commit" : [NSString stringWithFormat:@"Rebase %@ on commit", headBranchName];
     [items addObject:[PBRefMenuItem itemWithTitle:rebaseTitle action:@selector(rebaseHeadBranch:) enabled:!isOnHeadBranch]];
+
+    [items addObject:[PBRefMenuItem separatorItem]];
+    [items addObject:[PBRefMenuItem itemWithTitle:@"Open Bugs in Radar" action:@selector(openRadar:) enabled:hasRadar]];
 
     for (PBRefMenuItem *item in items) {
         [item setTarget:target];

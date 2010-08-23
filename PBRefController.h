@@ -33,6 +33,7 @@
 - (void) checkout:(PBRefMenuItem *)sender;
 - (void) merge:(PBRefMenuItem *)sender;
 - (void) cherryPick:(PBRefMenuItem *)sender;
+- (void)openRadar:(PBRefMenuItem*)sender;
 - (void) rebaseHeadBranch:(PBRefMenuItem *)sender;
 - (void) createBranch:(PBRefMenuItem *)sender;
 - (void) copySHA:(PBRefMenuItem *)sender;

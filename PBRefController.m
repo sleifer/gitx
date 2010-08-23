@@ -142,6 +142,17 @@
 }
 
 
+#pragma mark Open Radar
+
+- (void)openRadar:(PBRefMenuItem*)sender
+{
+    id <PBGitRefish> refish = [sender refish];
+	if ([[refish refishType] isEqualToString:kGitXCommitType]) {
+		NSString *url = [(PBGitCommit*)refish referencedRadarsLink];
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+	}
+}
+
 #pragma mark Rebase
 
 - (void) rebaseHeadBranch:(PBRefMenuItem *)sender
