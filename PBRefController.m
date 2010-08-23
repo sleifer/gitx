@@ -310,24 +310,25 @@
 
 - (NSArray *)tableView:(NSTableView *)aTableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet
 {
-	PBGitCommit *commit = [[commitController arrangedObjects] objectAtIndex:[indexSet firstIndex]];
-
-	int retValue = 1;
-    NSArray *args = [NSArray arrayWithObjects:@"format-patch", @"-1", @"-o", [dropDestination path], [[commit sha] string], nil];
-    NSString *info = [historyController.repository outputInWorkdirForArguments:args retValue:&retValue];
-    if (retValue) {
-        NSString *message = [NSString stringWithFormat:@"Unable to export patch"];
-        [historyController.repository.windowController showMessageSheet:message infoText:@""];
-		return nil;
-    }
-
+	NSArray *draggedCommits = [[commitController arrangedObjects] objectsAtIndexes:indexSet];
 	NSMutableArray *filenames = [NSMutableArray array];
-	NSArray *lines = [info componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-	for (NSString *line in lines) {
-		NSString *filename = [line lastPathComponent];
-		if (![filename length])
-			continue;
-		[filenames addObject:filename];
+	NSInteger i = 0;
+	for (PBGitCommit *commit in draggedCommits) {
+		i++;
+		int retValue = 1;
+		NSArray *args = [NSArray arrayWithObjects:@"format-patch", @"-1", @"-o", [dropDestination path], [[commit sha] string], nil];
+		NSString *info = [historyController.repository outputInWorkdirForArguments:args retValue:&retValue];
+		if (retValue) {
+			NSString *message = [NSString stringWithFormat:@"Unable to export patch"];
+			[historyController.repository.windowController showMessageSheet:message infoText:@""];
+			return nil;
+		}
+		NSString *filename = [info lastPathComponent];
+		NSString *newFilename = [filename stringByReplacingOccurrencesOfString:@"0001-" withString:[NSString stringWithFormat:@"%04d-", i]];
+		NSString *oldPath = [[dropDestination path] stringByAppendingPathComponent:filename];
+		NSString *newPath = [[dropDestination path] stringByAppendingPathComponent:newFilename];
+		[[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:nil];
+		[filenames addObject:newFilename];
 	}
 	return filenames;
 }
