@@ -20,8 +20,6 @@ var highlightDiff = function(diff, element, callbacks) {
 
     var startname = "";
     var endname = "";
-    var line1 = "";
-    var line2 = "";
     var diffContent = "";
     var finalContent = "";
     var lines = content.split('\n');
@@ -34,6 +32,7 @@ var highlightDiff = function(diff, element, callbacks) {
     var hunk_start_line_2 = -1;
 
     var header = false;
+	var inTable = false;
 
     var finishContent = function()
     {
@@ -58,8 +57,6 @@ var highlightDiff = function(diff, element, callbacks) {
             title = startname + " renamed to " + endname;
 
         if (binary && endname == "/dev/null") { // in cases of a deleted binary file, there is no diff/file to display
-            line1 = "";
-            line2 = "";
             diffContent = "";
             file_index++;
             startname = "";
@@ -74,8 +71,6 @@ var highlightDiff = function(diff, element, callbacks) {
 
         if (!binary && (diffContent != ""))  {
             finalContent +=     '<div class="diffContent">' +
-                                '<div class="lineno">' + line1 + "</div>" +
-                                '<div class="lineno">' + line2 + "</div>" +
                                 '<div class="lines">' + diffContent + "</div>" +
                             '</div>';
         }
@@ -91,8 +86,6 @@ var highlightDiff = function(diff, element, callbacks) {
         if (diffContent != "" || binary)
             finalContent += '</div>';
 
-        line1 = "";
-        line2 = "";
         diffContent = "";
         file_index++;
         startname = "";
@@ -104,6 +97,10 @@ var highlightDiff = function(diff, element, callbacks) {
         var firstChar = l.charAt(0);
 
         if (firstChar == "d" && l.charAt(1) == "i") {           // "diff", i.e. new file, we have to reset everything
+			if (inTable == true) {
+				diffContent += '</table>';
+				inTable = false;
+			}
             header = true;                      // diff always starts with a header
 
             finishContent(); // Finish last file
@@ -180,10 +177,14 @@ var highlightDiff = function(diff, element, callbacks) {
             }
 
             // Finish the header
-            if (firstChar == "@")
+            if (firstChar == "@") {
+				diffContent += '<table>';
+				diffContent += '<col><col><col width="100%">';
+				inTable = true;
                 header = false;
-            else
+            } else {
                 continue;
+			}
         }
 
         sindex = "index=" + lindex.toString() + " ";
@@ -192,15 +193,23 @@ var highlightDiff = function(diff, element, callbacks) {
             if (m = l.match(/\s+$/))
                 l = l.replace(/\s+$/, "<span class='whitespace'>" + m + "</span>");
 
-            line1 += "\n";
-            line2 += ++hunk_start_line_2 + "\n";
-            diffContent += "<div " + sindex + "class='addline'>" + l + "</div>";
+			diffContent += '<tr>';
+			diffContent += '<td class="lineno">' + "" + "</td>";
+			diffContent += '<td class="lineno">' + ++hunk_start_line_2 + "</td>";
+			
+            diffContent += "<td " + sindex + "class='addline'>" + l + "</td>";
+			diffContent += '</tr>';
         } else if (firstChar == "-") {
-            line1 += ++hunk_start_line_1 + "\n";
-            line2 += "\n";
-            diffContent += "<div " + sindex + "class='delline'>" + l + "</div>";
+			diffContent += '<tr>';
+			diffContent += '<td class="lineno">' + ++hunk_start_line_1 + "</td>";
+			diffContent += '<td class="lineno">' + "" + "</td>";
+			
+            diffContent += "<td " + sindex + "class='delline'>" + l + "</td>";
+			diffContent += '</tr>';
         } else if (firstChar == "@") {
             if (header) {
+				diffContent += '<table>';
+				inTable = true;
                 header = false;
             }
 
@@ -209,16 +218,25 @@ var highlightDiff = function(diff, element, callbacks) {
                 hunk_start_line_1 = parseInt(m[1]) - 1;
                 hunk_start_line_2 = parseInt(m[2]) - 1;
             }
-            line1 += "...\n";
-            line2 += "...\n";
-            diffContent += "<div " + sindex + "class='hunkheader'>" + l + "</div>";
+			diffContent += '<tr>';
+			diffContent += '<td class="lineno">' + "..." + "</td>";
+			diffContent += '<td class="lineno">' + "..." + "</td>";
+			
+            diffContent += "<td " + sindex + "class='hunkheader'>" + l + "</td>";
+			diffContent += '</tr>';
         } else if (firstChar == " ") {
-            line1 += ++hunk_start_line_1 + "\n";
-            line2 += ++hunk_start_line_2 + "\n";
-            diffContent += "<div " + sindex + "class='noopline'>" + l + "</div>";
+			diffContent += '<tr>';
+			diffContent += '<td class="lineno">' + ++hunk_start_line_1 + "</td>";
+			diffContent += '<td class="lineno">' + ++hunk_start_line_2 + "</td>";
+			
+            diffContent += "<td " + sindex + "class='noopline'>" + l + "</td>";
+			diffContent += '</tr>';
         }
         lindex++;
     }
+
+		diffContent += '</table>';
+		
 
     finishContent();
 
