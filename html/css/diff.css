@@ -14,6 +14,9 @@
 
 .diff .file .diffContent {
     white-space: pre;
+/*
+    white-space: pre-wrap;
+*/
     font-family: Menlo, Monaco;
 }
 
