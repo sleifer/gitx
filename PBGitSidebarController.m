@@ -29,6 +29,8 @@
 @implementation PBGitSidebarController
 @synthesize items;
 @synthesize sourceListControlsView;
+@synthesize historyViewController;
+@synthesize commitViewController;
 
 - (id)initWithRepository:(PBGitRepository *)theRepository superController:(PBGitWindowController *)controller
 {
