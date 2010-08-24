@@ -44,6 +44,9 @@ extern NSString * const kGitXCommitType;
 - (BOOL) isOnSameBranchAs:(PBGitCommit *)other;
 - (BOOL) isOnHeadBranch;
 
+- (NSArray*)referencedRadars;
+- (NSString*)referencedRadarsLink;
+
 // <PBGitRefish>
 - (NSString *) refishName;
 - (NSString *) shortName;
