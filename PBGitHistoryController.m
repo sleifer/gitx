@@ -553,12 +553,12 @@
     NSArray *filePaths = [[treeController selectedObjects] valueForKey:@"fullPath"];
 
     NSMenu *menu = [[NSMenu alloc] init];
-    for (NSMenuItem *item in [self menuItemsForPaths:filePaths])
+    for (NSMenuItem *item in [self menuItemsForPaths:filePaths addSeparator:NO])
         [menu addItem:item];
     return menu;
 }
 
-- (NSArray *)menuItemsForPaths:(NSArray *)paths
+- (NSArray *)menuItemsForPaths:(NSArray *)paths addSeparator:(BOOL)addSeparator
 {
     NSMutableArray *filePaths = [NSMutableArray array];
     for (NSString *filePath in paths)
@@ -587,7 +587,12 @@
                                                            action:@selector(openFilesAction:)
                                                     keyEquivalent:@""];
 
-    NSArray *menuItems = [NSArray arrayWithObjects:historyItem, diffItem, checkoutItem, finderItem, openFilesItem, nil];
+    NSArray *menuItems;
+	if (addSeparator) {
+		menuItems = [NSArray arrayWithObjects:historyItem, diffItem, checkoutItem, [NSMenuItem separatorItem], finderItem, openFilesItem, [NSMenuItem separatorItem], nil];
+	} else {
+		menuItems = [NSArray arrayWithObjects:historyItem, diffItem, checkoutItem, [NSMenuItem separatorItem], finderItem, openFilesItem, nil];
+	}
     for (NSMenuItem *item in menuItems) {
         [item setTarget:self];
         [item setRepresentedObject:filePaths];

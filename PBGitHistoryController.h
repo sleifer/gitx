@@ -69,7 +69,7 @@
 
 // Context menu methods
 - (NSMenu *)contextMenuForTreeView;
-- (NSArray *)menuItemsForPaths:(NSArray *)paths;
+- (NSArray *)menuItemsForPaths:(NSArray *)paths addSeparator:(BOOL)addSeparator;
 - (void)showCommitsFromTree:(id)sender;
 - (void)showInFinderAction:(id)sender;
 - (void)openFilesAction:(id)sender;
