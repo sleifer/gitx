@@ -32,7 +32,12 @@ NSString * const kGitXCommitType = @"commit";
 
 - (NSString *) dateString
 {
-    return [self.date distanceOfTimeInWordsFromNow];
+	if ([PBGitDefaults useRelativeDates] == YES) {
+		return [self.date distanceOfTimeInWordsFromNow];
+	} else {
+		NSDateFormatter* formatter = [[NSDateFormatter alloc] initWithDateFormat:@"%d %b, %Y %I:%M %p" allowNaturalLanguage:NO];
+		return [formatter stringFromDate:self.date];
+	}
 }
 
 - (NSArray*) treeContents

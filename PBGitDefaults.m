@@ -11,6 +11,7 @@
 #define kDefaultVerticalLineLength 50
 #define kCommitMessageViewVerticalLineLength @"PBCommitMessageViewVerticalLineLength"
 #define kCommitMessageViewHasVerticalLine @"PBCommitMessageViewHasVerticalLine"
+#define kUseRelativeDates @"PBUseRelativeDates"
 #define kEnableGist @"PBEnableGist"
 #define kEnableGravatar @"PBEnableGravatar"
 #define kConfirmPublicGists @"PBConfirmPublicGists"
@@ -35,6 +36,8 @@
                       forKey:kCommitMessageViewVerticalLineLength];
     [defaultValues setObject:[NSNumber numberWithBool:YES]
                       forKey:kCommitMessageViewHasVerticalLine];
+    [defaultValues setObject:[NSNumber numberWithBool:YES]
+              forKey:kUseRelativeDates];
     [defaultValues setObject:[NSNumber numberWithBool:YES]
               forKey:kEnableGist];
     [defaultValues setObject:[NSNumber numberWithBool:YES]
@@ -64,6 +67,11 @@
 + (BOOL) commitMessageViewHasVerticalLine
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:kCommitMessageViewHasVerticalLine];
+}
+
++ (BOOL) useRelativeDates
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kUseRelativeDates];
 }
 
 + (BOOL) isGistEnabled

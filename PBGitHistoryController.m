@@ -42,7 +42,8 @@
 - (void)awakeFromNib
 {
     self.selectedCommitDetailsIndex = [[NSUserDefaults standardUserDefaults] integerForKey:kHistorySelectedDetailIndexKey];
-
+	
+	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.PBUseRelativeDates" options:NSKeyValueObservingOptionNew context:@"relativeDates"];
     [commitController addObserver:self forKeyPath:@"selection" options:0 context:@"commitChange"];
     [commitController addObserver:self forKeyPath:@"arrangedObjects.@count" options:NSKeyValueObservingOptionInitial context:@"updateCommitCount"];
     [treeController addObserver:self forKeyPath:@"selection" options:0 context:@"treeChange"];
@@ -220,6 +221,11 @@
         [self restoreFileBrowserSelection];
         return;
     }
+	
+	if ([(NSString*)context isEqualToString:@"relativeDates"]) {
+		[commitList reloadData];
+		return;
+	}
 
     if ([(NSString *)context isEqualToString: @"treeChange"]) {
         [self updateQuicklookForce: NO];
@@ -455,6 +461,8 @@
     float position = [[[historySplitView subviews] objectAtIndex:0] frame].size.height;
     [[NSUserDefaults standardUserDefaults] setFloat:position forKey:@"PBGitSplitViewPosition"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+
+	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.PBUseRelativeDates"];
 
     if (commitController) {
         [commitController removeObserver:self forKeyPath:@"selection"];

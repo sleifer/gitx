@@ -13,6 +13,7 @@
 
 + (int) commitMessageViewVerticalLineLength;
 + (BOOL) commitMessageViewHasVerticalLine;
++ (BOOL) useRelativeDates;
 + (BOOL) isGistEnabled;
 + (BOOL) isGravatarEnabled;
 + (BOOL) confirmPublicGists;
