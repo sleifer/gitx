@@ -54,6 +54,7 @@
     PBGitTree *gitTree;
     PBGitCommit *webCommit;
     PBGitCommit *selectedCommit;
+	NSArray *lastSearchSelection;
 }
 
 @property (assign) int selectedCommitDetailsIndex;
@@ -61,6 +62,7 @@
 @property (retain) PBGitTree* gitTree;
 @property (readonly) NSArrayController *commitController;
 @property (readonly) PBRefController *refController;
+@property (retain) NSArray *lastSearchSelection;
 
 - (IBAction) setDetailedView:(id)sender;
 - (IBAction) setTreeView:(id)sender;

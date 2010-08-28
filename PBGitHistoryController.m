@@ -39,7 +39,8 @@
 
 
 @implementation PBGitHistoryController
-@synthesize selectedCommitDetailsIndex, webCommit, gitTree, commitController, refController;
+
+@synthesize selectedCommitDetailsIndex, webCommit, gitTree, commitController, refController, lastSearchSelection;
 
 - (void)awakeFromNib
 {
@@ -47,6 +48,7 @@
 	
 	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.PBUseRelativeDates" options:NSKeyValueObservingOptionNew context:@"relativeDates"];
     [commitController addObserver:self forKeyPath:@"selection" options:0 context:@"commitChange"];
+    [commitController addObserver:self forKeyPath:@"filterPredicate" options:0 context:@"filterChange"];
     [commitController addObserver:self forKeyPath:@"arrangedObjects.@count" options:NSKeyValueObservingOptionInitial context:@"updateCommitCount"];
     [treeController addObserver:self forKeyPath:@"selection" options:0 context:@"treeChange"];
 
@@ -241,6 +243,21 @@
     if ([(NSString *)context isEqualToString: @"commitChange"]) {
         [self updateKeys];
         [self restoreFileBrowserSelection];
+        return;
+    }
+	
+    if ([(NSString *)context isEqualToString: @"filterChange"]) {
+		int count = [[commitController arrangedObjects] count];
+		
+		if (count > 0 && [[searchField stringValue] length] != 0) {
+			lastSearchSelection = [NSArray arrayWithArray:[commitController arrangedObjects]];
+		} else if (count > 0 && [[searchField stringValue] length] == 0) {
+			[commitController setSelectedObjects:lastSearchSelection];
+			NSInteger newIndex = [[commitController selectionIndexes] firstIndex];
+			[commitList scrollRowToVisible:newIndex];
+		} else {
+			lastSearchSelection = nil;
+		}
         return;
     }
 	
