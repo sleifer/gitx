@@ -63,6 +63,7 @@
 @property (readonly) NSArrayController *commitController;
 @property (readonly) PBRefController *refController;
 @property (retain) NSArray *lastSearchSelection;
+@property (retain) NSArray *currentFileBrowserSelectionPath;
 
 - (IBAction) setDetailedView:(id)sender;
 - (IBAction) setTreeView:(id)sender;
@@ -103,5 +104,7 @@
 - (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex;
 - (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset;
 - (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset;
+
+- (void) restoreFileBrowserSelection;
 
 @end

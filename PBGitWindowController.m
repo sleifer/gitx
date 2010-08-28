@@ -17,7 +17,7 @@
 @implementation PBGitWindowController
 
 
-@synthesize repository;
+@synthesize repository, sidebarController;
 
 - (id)initWithRepository:(PBGitRepository*)theRepository displayDefault:(BOOL)displayDefault
 {

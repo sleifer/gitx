@@ -40,7 +40,7 @@
 
 @implementation PBGitHistoryController
 
-@synthesize selectedCommitDetailsIndex, webCommit, gitTree, commitController, refController, lastSearchSelection;
+@synthesize selectedCommitDetailsIndex, webCommit, gitTree, commitController, refController, lastSearchSelection, currentFileBrowserSelectionPath;
 
 - (void)awakeFromNib
 {

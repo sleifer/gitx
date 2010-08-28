@@ -32,6 +32,7 @@
 }
 
 @property (assign) __weak PBGitRepository *repository;
+@property (readonly) PBGitSidebarController *sidebarController;
 
 - (id)initWithRepository:(PBGitRepository*)theRepository displayDefault:(BOOL)display;
 

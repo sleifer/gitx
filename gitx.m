@@ -50,7 +50,7 @@ void usage(char const *programName)
 
     printf("Usage: %s (--help|--version)\n", programName);
     printf("   or: %s (--commit|-h)\n", programName);
-    printf("   or: %s <revlist options>\n", programName);
+    printf("   or: %s [--blame] <revlist options>\n", programName);
     printf("\n");
     printf("\t-h, --help          print this help\n");
     printf("\t--commit, -c        start GitX in commit mode\n");
