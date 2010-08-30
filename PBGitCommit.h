@@ -20,12 +20,14 @@ extern NSString * const kGitXCommitType;
     PBGitSHA *sha;
 
     NSString* subject;
+    NSString* body;
     NSString* author;
     NSString *committer;
     NSString* details;
     NSString *_patch;
     NSArray *parents;
     NSString *realSHA;
+	NSString *svnRevision;
 
     int timestamp;
     char sign;
@@ -54,6 +56,8 @@ extern NSString * const kGitXCommitType;
 
 @property (readonly) PBGitSHA *sha;
 @property (copy) NSString* subject;
+@property (copy) NSString* body;
+@property (copy) NSString *svnRevision;
 @property (copy) NSString* author;
 @property (copy) NSString *committer;
 @property (retain) NSArray *parents;

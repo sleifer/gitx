@@ -19,11 +19,26 @@ NSString * const kGitXCommitType = @"commit";
 
 @implementation PBGitCommit
 
-@synthesize repository, subject, timestamp, author, sign, lineInfo;
+@synthesize repository, subject, body, timestamp, author, sign, lineInfo;
+@synthesize svnRevision;
 @synthesize sha;
 @synthesize parents;
 @synthesize committer;
 
+
+- (NSString*)svnRevision
+{
+	if (svnRevision == nil && body != nil) {
+		NSRange tagRange = [body rangeOfString:@"git-svn-id:"];
+		if (tagRange.location != NSNotFound) {
+			NSRange atRange = [body rangeOfString:@"@" options:0 range:NSMakeRange (tagRange.location, [body length] - tagRange.location)];
+			NSRange spaceRange = [body rangeOfString:@" " options:0 range:NSMakeRange (atRange.location, [body length] - atRange.location)];
+			svnRevision = [body substringWithRange:NSMakeRange (atRange.location + 1, spaceRange.location - atRange.location - 1)];
+		}
+	}
+	
+	return svnRevision;
+}
 
 - (NSDate *)date
 {
