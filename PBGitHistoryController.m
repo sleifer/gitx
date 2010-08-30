@@ -384,6 +384,19 @@
 
 }
 
+- (void) copyCommitSVNRevision
+{
+    PBGitCommit *commit = [[commitController selectedObjects] lastObject];
+    if (!commit)
+        return;
+    NSString *info = [commit svnRevision];
+
+    NSPasteboard *a =[NSPasteboard generalPasteboard];
+    [a declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+    [a setString:info forType: NSStringPboardType];
+
+}
+
 - (IBAction) toggleQLPreviewPanel:(id)sender
 {
     if ([[QLPreviewPanel sharedPreviewPanel] respondsToSelector:@selector(setDataSource:)]) {

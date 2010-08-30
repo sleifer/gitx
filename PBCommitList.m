@@ -56,6 +56,11 @@
     [controller copyCommitSHA];
 }
 
+- (void) copySVNRevision:(id)sender
+{
+    [controller copyCommitSVNRevision];
+}
+
 - (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)anItem
 {
 	SEL action = [anItem action];

@@ -95,6 +95,7 @@
 
 - (void) copyCommitInfo;
 - (void) copyCommitSHA;
+- (void) copyCommitSVNRevision;
 
 - (BOOL) hasNonlinearPath;
 
